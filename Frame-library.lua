@@ -173,3 +173,5 @@ function create:touch_grow(data)
 		obj:TweenSize(data.normalsize, "Out", "Linear", 0.1, true)    
 	end)  
 end
+
+return create

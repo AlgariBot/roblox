@@ -3,7 +3,7 @@ local create = {}
 local rgb = Color3.fromRGB
 local ud = UDim2.new
 
-local function frame(data)
+function create:frame(data)
 	local frame = Instance.new("Frame")
 	frame.Name = data.name or "Frame"
 	frame.Size = data.size or UDim2.new(0,50,0,50)
@@ -20,7 +20,7 @@ local function frame(data)
 	return {frame}
 end
 
-local function text_label(data)
+function create:text_label(data)
 	local text_label = Instance.new("TextLabel")
 	text_label.Name = data.name or "TextLabel"
 	text_label.Size = data.size or ud(0,100,0,100)
@@ -43,7 +43,7 @@ local function text_label(data)
 	return {text_label}
 end
 
-local function text_box(data)
+function create:text_box(data)
 	local text_box = Instance.new("TextBox")
 	text_box.Name = data.name or "TextButton"
 	text_box.Size = data.size or ud(0,100,0,100)
@@ -67,7 +67,7 @@ local function text_box(data)
 	return {text_box}
 end
 
-local function button(data)
+function create:button(data)
 	local text_box = Instance.new("TextButton")
 	text_box.Name = data.name or "TextButton"
 	text_box.Size = data.size or ud(0,100,0,100)
@@ -92,7 +92,7 @@ local function button(data)
 	return {text_box}
 end
 
-local function image_button(data)
+function create:image_button(data)
 	local img = Instance.new("ImageButton")
 	img.Name = data.name or "ImageButton"
 	img.Size = data.size or ud(0,100,0,100)
@@ -111,7 +111,7 @@ local function image_button(data)
 	return {img}
 end
 
-local function image_label(data)
+function create:image_label(data)
 	local img = Instance.new("ImageLabel")
 	img.Name = data.name or "ImageLabel"
 	img.Size = data.size or ud(0,100,0,100)
@@ -129,7 +129,7 @@ local function image_label(data)
 	return {img}
 end
 
-local function scroll_frame(data)
+function create:scroll_frame(data)
 	local scroll = Instance.new("ScrollingFrame")
 	scroll.Name = data.name or "ScrollingFrame"
 	scroll.Size = data.size or ud(0,100,0,100)
@@ -148,16 +148,28 @@ end
 
 -- other
 
-local function corner(data)
+function create:corner(data)
 	local corner = Instance.new("UICorner")
 	corner.CornerRadius = data.radius
 	corner.Parent = data.parent
 end
 
-local function line(data)
+function create:line(data)
 	local line = Instance.new("UIStroke")
 	line.Color = data.color
 	line.Thickness = data.thickness
 	line.Parent = data.parent
 	return {line}
+end
+
+function create:touch_grow(data)  
+	local obj = data.parent
+	obj.AnchorPoint = Vector2.new(0.5, 0.5)    
+	obj.MouseEnter:Connect(function()    
+	obj:TweenSize(data.growsize, "Out", "Linear", 0.1, true)    
+	end)    
+    
+	obj.MouseLeave:Connect(function()    
+		obj:TweenSize(data.normalsize, "Out", "Linear", 0.1, true)    
+	end)  
 end

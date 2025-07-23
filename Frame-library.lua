@@ -166,11 +166,11 @@ function create:touch_grow(data)
 	local obj = data.parent
 	obj.AnchorPoint = Vector2.new(0.5, 0.5)    
 	obj.MouseEnter:Connect(function()    
-	obj:TweenSize(data.growsize, "Out", "Linear", 0.1, true)    
+	obj:TweenSize(data.growsize, "Out", "Linear", data.speed or 0.1, true)    
 	end)    
     
 	obj.MouseLeave:Connect(function()    
-		obj:TweenSize(data.normalsize, "Out", "Linear", 0.1, true)    
+		obj:TweenSize(data.normalsize, "Out", "Linear", data.speed or 0.1, true)    
 	end)  
 end
 

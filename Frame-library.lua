@@ -141,6 +141,7 @@ function create:scroll_frame(data)
 	scroll.BackgroundTransparency = data.transparency or 0
 	scroll.ScrollBarThickness = data.bar_thickness or 8
 	scroll.CanvasSize = data.canvas_size or ud(0,0,1,0)
+	scroll.AutomaticCanvasSize = data.auto_size or "None"
 	scroll.ElasticBehavior = data.elastic or "Never"
 	scroll.ScrollingDirection = data.scroll_direction or "XY"
 	return {scroll}

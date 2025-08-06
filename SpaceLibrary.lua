@@ -14,14 +14,10 @@ local Main_2 = Instance.new("Frame", ScreenGui_1);
 Main_2.BorderSizePixel = 0;
 Main_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
 Main_2.Size = UDim2.new(0, 240, 0, 300);
-Main_2.Position = UDim2.new(0.2, 6, 0, -7);
+Main_2.Position = UDim2.new(0.2, 6, 0, -7)
+Main_2.Draggable = true
 Main_2.Name = [[Main]];
 Main_2.BackgroundTransparency = 0.4;
-
-
-local UIDragDetector_3 = Instance.new("UIDragDetector", Main_2);
-UIDragDetector_3.DragUDim2 = UDim2.new(0, 3, 0, -3);
-
 
 local UICorner_4 = Instance.new("UICorner", Main_2);
 
@@ -101,6 +97,7 @@ Icon_c.TextColor3 = Color3.fromRGB(255, 255, 255);
 Icon_c.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
 Icon_c.FontFace = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
 Icon_c.Size = UDim2.new(0, 70, 0, 20);
+Icon_c.Draggable = true
 Icon_c.Text = [[Open]];
 Icon_c.Name = [[Icon]];
 Icon_c.Position = UDim2.new(0, 67, 0, 7);
@@ -115,8 +112,6 @@ Close_6.MouseButton1Click:Connect(function()
 	Main_2.Visible = false
 end)
 
-local UIDragDetector_d = Instance.new("UIDragDetector", Icon_c);
-UIDragDetector_d.DragUDim2 = UDim2.new(0, -8, 0, -1);
 
 
 local UICorner_e = Instance.new("UICorner", Icon_c);

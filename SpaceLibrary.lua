@@ -1,14 +1,10 @@
-local CollectionService = game:GetService("CollectionService");
-
 local Space = {}
 
 -- G2L converted into executor Style
 -- i hope you can use this :D
 
-local ScreenGui_1 = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"));
+local ScreenGui_1 = Instance.new("ScreenGui", gethui());
 ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-
-CollectionService:AddTag(ScreenGui_1, [[main]]);
 
 local Main_2 = Instance.new("Frame", ScreenGui_1);
 Main_2.BorderSizePixel = 0;

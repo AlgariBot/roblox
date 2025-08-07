@@ -1,7 +1,6 @@
 local Space = {}
 
--- G2L converted into executor Style
--- i hope you can use this :D
+-- i hope you can use this :D or ask chatgpt how to use it
 
 local ScreenGui_1 = Instance.new("ScreenGui", gethui());
 ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
@@ -257,6 +256,7 @@ function Space:Button(data)
 	Buttons_1c.BackgroundTransparency = 0.6;
 	Buttons_1c.AutomaticSize = Enum.AutomaticSize.Y;
 	Buttons_1c.Size = UDim2.new(1, -10, 0, 10);
+	Buttons_1c.Text = data.Text or "Button"
 	Buttons_1c.Name = [[Buttons]];
 
 
@@ -306,7 +306,7 @@ function Space:Toggle(data)
 	Toggles_1e.MouseButton1Click:Connect(function()
 		State = not State
 		if State then
-			Frame_20.BackgroundColor3 = Color3.fromRGB(80,80,80)
+			Frame_20.BackgroundColor3 = Color3.fromRGB(180,180,180)
 		else
 			Frame_20.BackgroundColor3 = Color3.fromRGB(49,49,49)
 		end

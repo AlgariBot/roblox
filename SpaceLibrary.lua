@@ -1,16 +1,22 @@
 local Space = {}
 
+--[[
+Space Library v0.2
+(+) Added Text Box
+    (▲) Resize Button for Textbox
+    (▲) Scrollable textbox
+(!) bug fixes
+]]
 -- i hope you can use this :D or ask chatgpt how to use it
 
 local ScreenGui_1 = Instance.new("ScreenGui", gethui());
-ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
 
 local Main_2 = Instance.new("Frame", ScreenGui_1);
 Main_2.BorderSizePixel = 0;
 Main_2.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
 Main_2.Size = UDim2.new(0, 240, 0, 300);
 Main_2.Position = UDim2.new(0.2, 6, 0, -7)
-Main_2.Draggable = true
+Main_2.Draggable = true;
 Main_2.Name = [[Main]];
 Main_2.BackgroundTransparency = 0.4;
 
@@ -27,7 +33,7 @@ Name_5.TextColor3 = Color3.fromRGB(255, 255, 255);
 Name_5.BackgroundTransparency = 1;
 Name_5.RichText = true;
 Name_5.Size = UDim2.new(1, 0, 0, 15);
-Name_5.Text = [[Space Library <font color="#00ffff"><b>0.1</b></font>]];
+Name_5.Text = [[Space Library <font color="#00ffff"><b>0.2</b></font>]];
 Name_5.Name = [[Name]];
 Name_5.Position = UDim2.new(0, 0, 0, 3);
 
@@ -317,6 +323,81 @@ function Space:Toggle(data)
 	
 	
 	return {Toggles_1e}
+end
+
+
+function Space:TextBox(data)
+	EditorFrame_a = Instance.new("Frame", data.Parent or nil);
+	EditorFrame_a.BorderSizePixel = 0;
+	EditorFrame_a.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+	EditorFrame_a.Size = UDim2.new(1, -10, 0, 40);
+	EditorFrame_a.Name = [[EditorFrame]];
+	EditorFrame_a.BackgroundTransparency = 1;
+
+
+	Resize_b = Instance.new("TextButton", EditorFrame_a);
+	Resize_b.TextWrapped = true;
+	Resize_b.BorderSizePixel = 0;
+	Resize_b.TextColor3 = Color3.fromRGB(255, 255, 255);
+	Resize_b.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+	Resize_b.FontFace = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+	Resize_b.ZIndex = 10;
+	Resize_b.Size = UDim2.new(0, 10, 0, 10);
+	Resize_b.Text = [[▼]];
+	Resize_b.BackgroundTransparency = 0.4;
+	Resize_b.Name = [[Resize]];
+
+
+	UICorner_c = Instance.new("UICorner", Resize_b);
+	UICorner_c.CornerRadius = UDim.new(0, 3);
+
+
+	Frame_d = Instance.new("Frame", EditorFrame_a);
+	Frame_d.BorderSizePixel = 0;
+	Frame_d.BackgroundColor3 = Color3.fromRGB(42, 42, 42);
+	Frame_d.Size = UDim2.new(0, 10, 1, 0);
+
+
+	ScrollingFrame_e = Instance.new("ScrollingFrame", EditorFrame_a);
+	ScrollingFrame_e.BorderSizePixel = 0;
+	ScrollingFrame_e.CanvasSize = UDim2.new(0, 0, 0, 0);
+	ScrollingFrame_e.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
+	ScrollingFrame_e.AutomaticCanvasSize = Enum.AutomaticSize.XY;
+	ScrollingFrame_e.Size = UDim2.new(1, -10, 1, 0);
+	ScrollingFrame_e.Position = UDim2.new(0, 10, 0, 0);
+	ScrollingFrame_e.ScrollBarThickness = 0;
+	ScrollingFrame_e.BackgroundTransparency = 0.8;
+
+
+	TextBox_f = Instance.new("TextBox", ScrollingFrame_e);
+	TextBox_f.CursorPosition = -1;
+	TextBox_f.TextXAlignment = Enum.TextXAlignment.Left;
+	TextBox_f.BorderSizePixel = 0;
+	TextBox_f.TextSize = 12;
+	TextBox_f.TextColor3 = Color3.fromRGB(255, 255, 255);
+	TextBox_f.TextYAlignment = Enum.TextYAlignment.Top;
+	TextBox_f.BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+	TextBox_f.FontFace = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+	TextBox_f.AutomaticSize = Enum.AutomaticSize.XY;
+	TextBox_f.MultiLine = true;
+	TextBox_f.ClearTextOnFocus = false;
+	TextBox_f.PlaceholderText = data.Placeholder or [[Editor]];
+	TextBox_f.Size = UDim2.new(1, 0, 1, 0);
+	TextBox_f.Text = data.Text or [[]];
+	TextBox_f.BackgroundTransparency = 1;
+
+	local state = false
+	Resize_b.MouseButton1Click:Connect(function()
+		state = not state
+		if state then
+			Resize_b.Text = [[▲]]
+			EditorFrame_a.Size = UDim2.new(1,-10,0,80)
+		else
+			Resize_b.Text = [[▼]]
+			EditorFrame_a.Size = UDim2.new(1,-10,0,40)
+		end
+	end)
+	return {TextBox_f}
 end
 
 -- More

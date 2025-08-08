@@ -2,7 +2,7 @@ local Space = {}
 local Number = 1
 
 --[[
-Space Library v0.2
+Space Library v0.2.1
 (+) Added Text Box
     (▲) Resize Button for Textbox
     (▲) Scrollable textbox
@@ -226,9 +226,8 @@ function Space:CreatePage(data)
 	UIListLayout_1a.HorizontalAlignment = Enum.HorizontalAlignment.Center;
 	UIListLayout_1a.Padding = UDim.new(0, 2);
 
-	return {MainPage_18}
-
 	Number = Number + 1
+	return {MainPage_18}
 end
 
 function Space:Label(data)

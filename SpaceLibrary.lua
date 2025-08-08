@@ -1,4 +1,5 @@
 local Space = {}
+local Number = 1
 
 --[[
 Space Library v0.2
@@ -160,7 +161,7 @@ function Space:CreatePage(data)
 	OpenPage_14.BackgroundTransparency = 0.4;
 	OpenPage_14.Size = UDim2.new(1, -10, 0, 20);
 	OpenPage_14.Text = data.Name or [[Page]];
-	OpenPage_14.Name = [[OpenPage]];
+	OpenPage_14.Name = Number .. [[OpenPage]];
 
 
 	local UICorner_15 = Instance.new("UICorner", OpenPage_14);
@@ -226,6 +227,8 @@ function Space:CreatePage(data)
 	UIListLayout_1a.Padding = UDim.new(0, 2);
 
 	return {MainPage_18}
+
+	Number = Number + 1
 end
 
 function Space:Label(data)
@@ -243,8 +246,9 @@ function Space:Label(data)
 	Labels_1b.Size = UDim2.new(1, -10, 0, 0);
 	Labels_1b.Text = data.Text or [[Text <font color="#00ffff"><b>(Unedited)</b></font>]];
 	Labels_1b.AutomaticSize = Enum.AutomaticSize.Y;
-	Labels_1b.Name = [[Labels]];
-	
+	Labels_1b.Name = Number .. [[Labels]];
+
+	Number = Number + 1
 	return {Labels_1b}
 end
 
@@ -263,7 +267,7 @@ function Space:Button(data)
 	Buttons_1c.AutomaticSize = Enum.AutomaticSize.Y;
 	Buttons_1c.Size = UDim2.new(1, -10, 0, 10);
 	Buttons_1c.Text = data.Text or "Button"
-	Buttons_1c.Name = [[Buttons]];
+	Buttons_1c.Name = Number .. [[Buttons]];
 
 
 	local UICorner_1d = Instance.new("UICorner", Buttons_1c);
@@ -272,6 +276,7 @@ function Space:Button(data)
 	if data.Run then
 		Buttons_1c.MouseButton1Click:Connect(data.Run)
 	end
+	Number = Number + 1
 	return {Buttons_1c}
 end
 
@@ -291,7 +296,7 @@ function Space:Toggle(data)
 	Toggles_1e.AutomaticSize = Enum.AutomaticSize.Y;
 	Toggles_1e.Size = UDim2.new(1, -10, 0, 0);
 	Toggles_1e.Text = data.Text or [[Toggle]];
-	Toggles_1e.Name = [[Toggles]];
+	Toggles_1e.Name = Number .. [[Toggles]];
 
 
 	local UICorner_1f = Instance.new("UICorner", Toggles_1e);
@@ -321,7 +326,7 @@ function Space:Toggle(data)
 			end
 	end)
 	
-	
+	Number = Number + 1
 	return {Toggles_1e}
 end
 
@@ -331,7 +336,7 @@ function Space:TextBox(data)
 	EditorFrame_a.BorderSizePixel = 0;
 	EditorFrame_a.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
 	EditorFrame_a.Size = UDim2.new(1, -10, 0, 40);
-	EditorFrame_a.Name = [[EditorFrame]];
+	EditorFrame_a.Name = Number .. [[EditorFrame]];
 	EditorFrame_a.BackgroundTransparency = 1;
 
 
@@ -397,6 +402,8 @@ function Space:TextBox(data)
 			EditorFrame_a.Size = UDim2.new(1,-10,0,40)
 		end
 	end)
+
+	Number = Number + 1
 	return {TextBox_f}
 end
 

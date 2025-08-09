@@ -235,7 +235,6 @@ function Space:Label(data)
 	Labels_1b.BorderSizePixel = 0;
 	Labels_1b.TextSize = 13;
 	Labels_1b.TextXAlignment = Enum.TextXAlignment.Left;
-	Labels_1b.TextTransparency = 0.3;
 	Labels_1b.TextYAlignment = Enum.TextYAlignment.Top;
 	Labels_1b.BackgroundColor3 = Color3.fromRGB(0, 0, 0);
 	Labels_1b.FontFace = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal);

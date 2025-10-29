@@ -5,10 +5,10 @@ discord: Celvirus
 local Emotes = {}
 
 
-ScreenGui_1 = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+local ScreenGui_1 = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
 ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-Frame_2 = Instance.new("Frame", ScreenGui_1)
+local Frame_2 = Instance.new("Frame", ScreenGui_1)
 Frame_2.BorderSizePixel = 0
 Frame_2.BackgroundColor3 = Color3.fromRGB(0, 30, 64)
 Frame_2.Size = UDim2.new(0, 218, 0, 280)
@@ -19,9 +19,9 @@ task.spawn(function()
     Frame_2.Active = true
 end)
 
-UICorner_3 = Instance.new("UICorner", Frame_2)
+local UICorner_3 = Instance.new("UICorner", Frame_2)
 
-closegui_4 = Instance.new("TextButton", Frame_2)
+local closegui_4 = Instance.new("TextButton", Frame_2)
 closegui_4.TextWrapped = true
 closegui_4.BorderSizePixel = 0
 closegui_4.TextSize = 13
@@ -34,7 +34,7 @@ closegui_4.Name = [[closegui]]
 closegui_4.Position = UDim2.new(0, 196, 0, 6)
 
 
-UICorner_5 = Instance.new("UICorner", closegui_4)
+local UICorner_5 = Instance.new("UICorner", closegui_4)
 UICorner_5.CornerRadius = UDim.new(0, 4)
 
 closegui_4.MouseButton1Click:Connect(function()
@@ -42,7 +42,7 @@ closegui_4.MouseButton1Click:Connect(function()
 end)
 
 
-tltl_6 = Instance.new("TextLabel", Frame_2)
+local tltl_6 = Instance.new("TextLabel", Frame_2)
 tltl_6.TextWrapped = true
 tltl_6.BorderSizePixel = 0
 tltl_6.TextSize = 13
@@ -56,7 +56,7 @@ tltl_6.Name = [[tltl]]
 tltl_6.Position = UDim2.new(0, 6, 0, 6)
 
 
-namebox = Instance.new("TextBox", Frame_2)
+local namebox = Instance.new("TextBox", Frame_2)
 namebox.CursorPosition = -1
 namebox.Name = [[namebox]]
 namebox.BorderSizePixel = 0
@@ -71,11 +71,11 @@ namebox.Position = UDim2.new(0, 8, 0, 248)
 namebox.Text = [[]]
 
 
-UICorner_8 = Instance.new("UICorner", namebox)
+local UICorner_8 = Instance.new("UICorner", namebox)
 UICorner_8.CornerRadius = UDim.new(0, 4)
 
 
-ScrollingFrame_9 = Instance.new("ScrollingFrame", Frame_2)
+local ScrollingFrame_9 = Instance.new("ScrollingFrame", Frame_2)
 ScrollingFrame_9.BorderSizePixel = 0
 ScrollingFrame_9.CanvasSize = UDim2.new(0, 0, 0, 0)
 ScrollingFrame_9.ElasticBehavior = Enum.ElasticBehavior.Never
@@ -87,16 +87,14 @@ ScrollingFrame_9.AutomaticSize = "Y"
 ScrollingFrame_9.ScrollBarThickness = 0
 
 
-UICorner_a = Instance.new("UICorner", ScrollingFrame_9)
+local UICorner_a = Instance.new("UICorner", ScrollingFrame_9)
 UICorner_a.CornerRadius = UDim.new(0, 4)
 
 
-UIListLayout_b = Instance.new("UIListLayout", ScrollingFrame_9)
+local UIListLayout_b = Instance.new("UIListLayout", ScrollingFrame_9)
 UIListLayout_b.Padding = UDim.new(0, 4)
 
-
-
-UIStroke_f = Instance.new("UIStroke", Frame_2)
+local UIStroke_f = Instance.new("UIStroke", Frame_2)
 UIStroke_f.Transparency = 0.6
 UIStroke_f.Thickness = 2
 UIStroke_f.Color = Color3.fromRGB(255, 255, 255)
@@ -196,4 +194,4 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 end
 
 
-return {Emotes,animate}
+return {Emotes,namebox}

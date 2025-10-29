@@ -83,6 +83,7 @@ ScrollingFrame_9.BackgroundColor3 = Color3.fromRGB(0, 26, 56)
 ScrollingFrame_9.Selectable = false
 ScrollingFrame_9.Size = UDim2.new(0, 200, 0, 196)
 ScrollingFrame_9.Position = UDim2.new(0, 10, 0, 36)
+ScrollingFrame_9.AutomaticSize = "Y"
 ScrollingFrame_9.ScrollBarThickness = 0
 
 

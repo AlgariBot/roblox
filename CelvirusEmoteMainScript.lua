@@ -1,0 +1,29 @@
+local Emotes = loadstring(game:HttpGet("https://raw.githubusercontent.com/AlgariBot/roblox/refs/heads/main/CelvirusEmote.lua"))()[1]
+
+Emotes.animate({
+	name=[[Blowjob <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="74543120303961",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-1.5),offset2=CFrame.new(0,0,-1.5),
+	rotX=0,rotY=180,rotZ=0,speed=20,toggleDelay=0,delay=0,speedMult=10
+})
+
+Emotes.animate({
+	name=[[Bent <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="122937877015539",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-2.2),offset2=CFrame.new(0,0,-1.3),
+	rotX=0,rotY=225,rotZ=0,speed=10,toggleDelay=0.5,delay=0,speedMult=1
+})
+
+Emotes.animate({
+	name=[[Stand <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="127935496272883",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-0.8),offset2=CFrame.new(0,0,-2),
+	rotX=0,rotY=260,rotZ=0,speed=0,toggleDelay=0.5,delay=3,speedMult=0
+})
+
+Emotes.animate({
+	name=[[Bang <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="90696131349427",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-0.5),offset2=CFrame.new(0,0,-1.4),
+	rotX=0,rotY=0,rotZ=0,speed=10,toggleDelay=0.5,delay=5,speedMult=0
+})

@@ -99,7 +99,6 @@ UIStroke_f.Transparency = 0.6
 UIStroke_f.Thickness = 2
 UIStroke_f.Color = Color3.fromRGB(255, 255, 255)
 
-
 function Emotes.animate(d)
 	local p=game.Players.LocalPlayer
 	local c=p.Character or p.CharacterAdded:Wait()
@@ -139,6 +138,7 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 		if ct then ct:Disconnect() ct=nil end
 		for _,x in ipairs(anims) do if x.Track then x.Track:Stop() x.Track=nil end end
 		isPlay,isTP=false,false b.BackgroundColor3 = Color3.fromRGB(0, 83, 141)
+		local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=false end
 	end
 
 	local function find(n)
@@ -175,6 +175,7 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 		t.CharacterAdded:Connect(stop)
 		isTP=not isTP if isTP then tp() end
 		if isPlay then stop() else
+			local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=true end
 			for _,x in ipairs(anims)do
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end)
 				if ok and tr then x.Track=tr x.Track.Looped=true x.Track:Play() end
@@ -192,6 +193,11 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
 	end)
 end
+
+
+
+
+
 
 
 return {Emotes,namebox}

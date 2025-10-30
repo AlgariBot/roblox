@@ -105,6 +105,7 @@ function Emotes.animate(d)
 	local c=p.Character or p.CharacterAdded:Wait()
 	local h=c:WaitForChild("Humanoid")
 	local a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
+	local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=true end
 	local anims={}
 	for _,id in ipairs({d.anim1,d.anim2,d.anim3,d.anim4,d.anim5,d.anim6}) do
 		if id~="" and id~="0" then
@@ -190,8 +191,10 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 		stop()
 		c=p.Character h=c:WaitForChild("Humanoid")
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
+		local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=true end
 	end)
 end
+
 
 
 return {Emotes,namebox}

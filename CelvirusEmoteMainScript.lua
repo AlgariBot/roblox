@@ -14,7 +14,7 @@ Emotes.animate({
 	name=[[Blowjob 2 <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
 	anim1="104741679253066",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
 	offset1=CFrame.new(0,0,-1.5),offset2=CFrame.new(0,0,-1.5),
-	rotX=0,rotY=180,rotZ=0,speed=20,toggleDelay=0,delay=0,speedMult=10
+	rotX=0,rotY=180,rotZ=0,speed=20,toggleDelay=0,delay=0,speedMult=5
 })
 
 Emotes.animate({

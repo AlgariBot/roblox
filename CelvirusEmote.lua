@@ -175,7 +175,10 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 		t.CharacterAdded:Connect(stop)
 		isTP=not isTP if isTP then tp() end
 		if isPlay then stop() else
-			local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=true end
+			local animScript=c:FindFirstChild("Animate")
+			if animScript then animScript.Disabled=true end
+			for _,track in ipairs(h:GetPlayingAnimationTracks()) do track:Stop() end
+			task.wait(0.1)
 			for _,x in ipairs(anims)do
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end)
 				if ok and tr then x.Track=tr x.Track.Looped=true x.Track:Play() end
@@ -193,11 +196,5 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
 	end)
 end
-
-
-
-
-
-
 
 return {Emotes,namebox}

@@ -44,3 +44,10 @@ Emotes.animate({
 	offset1=CFrame.new(0,0,-1),offset2=CFrame.new(0,0,-1.7),
 	rotX=0,rotY=0,rotZ=0,speed=10,toggleDelay=0.5,delay=0,speedMult=1
 })
+
+Emotes.animate({
+	name=[[Cat pose <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="104207613436553",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-0.5),offset2=CFrame.new(0,0,-1.4),
+	rotX=0,rotY=0,rotZ=0,speed=10,toggleDelay=0.5,delay=0,speedMult=1
+})

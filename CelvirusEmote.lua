@@ -1,103 +1,189 @@
---[[Sex Gui
-github: AlgariBot
-discord: Celvirus
-]]
-local Emotes = {}
-
-
 local ScreenGui_1 = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
 ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-local Frame_2 = Instance.new("Frame", ScreenGui_1)
-Frame_2.BorderSizePixel = 0
-Frame_2.BackgroundColor3 = Color3.fromRGB(0, 30, 64)
-Frame_2.Size = UDim2.new(0, 218, 0, 280)
-Frame_2.Position = UDim2.new(0, 304, 0, 76)
 
-task.spawn(function()
-	Frame_2.Draggable = true
-    Frame_2.Active = true
-end)
-
-local UICorner_3 = Instance.new("UICorner", Frame_2)
-
-local closegui_4 = Instance.new("TextButton", Frame_2)
-closegui_4.TextWrapped = true
-closegui_4.BorderSizePixel = 0
-closegui_4.TextSize = 13
-closegui_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-closegui_4.BackgroundColor3 = Color3.fromRGB(159, 0, 0)
-closegui_4.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-closegui_4.Size = UDim2.new(0, 16, 0, 18)
-closegui_4.Text = [[X]]
-closegui_4.Name = [[closegui]]
-closegui_4.Position = UDim2.new(0, 196, 0, 6)
+local LocalScript_2 = Instance.new("LocalScript", ScreenGui_1)
+local Emotes = {}
 
 
-local UICorner_5 = Instance.new("UICorner", closegui_4)
+local Frame_3 = Instance.new("Frame", ScreenGui_1)
+Frame_3.BorderSizePixel = 0
+Frame_3.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+Frame_3.Size = UDim2.new(0, 300, 0, 302)
+Frame_3.Position = UDim2.new(0, 238, 0, 74)
+
+
+local Close_4 = Instance.new("TextButton", Frame_3)
+Close_4.TextWrapped = true
+Close_4.RichText = true
+Close_4.BorderSizePixel = 0
+Close_4.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+Close_4.TextSize = 15
+Close_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Close_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Close_4.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+Close_4.BackgroundTransparency = 1
+Close_4.Size = UDim2.new(0, 20, 0, 20)
+Close_4.Text = [[<b>╳</b>]]
+Close_4.Name = [[Close]]
+Close_4.Position = UDim2.new(0, 238, 0, 6)
+
+
+local UICorner_5 = Instance.new("UICorner", Frame_3)
 UICorner_5.CornerRadius = UDim.new(0, 4)
 
-closegui_4.MouseButton1Click:Connect(function()
-	ScreenGui_1:Destroy()
-end)
+
+local Minimize_6 = Instance.new("TextButton", Frame_3)
+Minimize_6.TextWrapped = true
+Minimize_6.BorderSizePixel = 0
+Minimize_6.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
+Minimize_6.TextSize = 15
+Minimize_6.TextColor3 = Color3.fromRGB(255, 255, 255)
+Minimize_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Minimize_6.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Minimize_6.BackgroundTransparency = 1
+Minimize_6.Size = UDim2.new(0, 20, 0, 20)
+Minimize_6.Text = [[━]]
+Minimize_6.Name = [[Minimize]]
+Minimize_6.Position = UDim2.new(0, 274, 0, 6)
 
 
-local tltl_6 = Instance.new("TextLabel", Frame_2)
-tltl_6.TextWrapped = true
-tltl_6.BorderSizePixel = 0
-tltl_6.TextSize = 13
-tltl_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-tltl_6.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-tltl_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-tltl_6.BackgroundTransparency = 1
-tltl_6.Size = UDim2.new(0, 184, 0, 18)
-tltl_6.Text = [[CELVIRUS EMOTE (15)]]
-tltl_6.Name = [[tltl]]
-tltl_6.Position = UDim2.new(0, 6, 0, 6)
+local UIDragDetector_7 = Instance.new("UIDragDetector", Frame_3)
 
 
-local namebox = Instance.new("TextBox", Frame_2)
-namebox.CursorPosition = -1
+
+local name_8 = Instance.new("TextLabel", Frame_3)
+name_8.TextWrapped = true
+name_8.BorderSizePixel = 0
+name_8.TextSize = 15
+name_8.TextXAlignment = Enum.TextXAlignment.Left
+name_8.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+name_8.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+name_8.TextColor3 = Color3.fromRGB(255, 255, 255)
+name_8.BackgroundTransparency = 1
+name_8.RichText = true
+name_8.Size = UDim2.new(0, 218, 0, 20)
+name_8.Text = [[CEL<font color="rgb(255,128,0)">VIRUS</font> <b>0.2</b>]]
+name_8.Name = [[name]]
+name_8.Position = UDim2.new(0, 8, 0, 8)
+
+
+local namebox = Instance.new("TextBox", Frame_3)
 namebox.Name = [[namebox]]
+namebox.TextXAlignment = Enum.TextXAlignment.Left
 namebox.BorderSizePixel = 0
 namebox.TextWrapped = true
-namebox.TextSize = 15
-namebox.TextColor3 = Color3.fromRGB(255, 253, 253)
-namebox.BackgroundColor3 = Color3.fromRGB(0, 59, 116)
-namebox.FontFace = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-namebox.PlaceholderText = [[Enter Username/Displayname]]
-namebox.Size = UDim2.new(0, 202, 0, 24)
-namebox.Position = UDim2.new(0, 8, 0, 248)
+namebox.TextSize = 13
+namebox.TextColor3 = Color3.fromRGB(255, 255, 255)
+namebox.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+namebox.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+namebox.PlaceholderText = [[Target]]
+namebox.Size = UDim2.new(0, 246, 0, 26)
+namebox.Position = UDim2.new(0, 8, 0, 36)
 namebox.Text = [[]]
 
 
-local UICorner_8 = Instance.new("UICorner", namebox)
-UICorner_8.CornerRadius = UDim.new(0, 4)
-
-
-local ScrollingFrame_9 = Instance.new("ScrollingFrame", Frame_2)
-ScrollingFrame_9.BorderSizePixel = 0
-ScrollingFrame_9.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollingFrame_9.ElasticBehavior = Enum.ElasticBehavior.Never
-ScrollingFrame_9.BackgroundColor3 = Color3.fromRGB(0, 26, 56)
-ScrollingFrame_9.Selectable = false
-ScrollingFrame_9.Size = UDim2.new(0, 200, 0, 196)
-ScrollingFrame_9.Position = UDim2.new(0, 10, 0, 36)
-ScrollingFrame_9.AutomaticCanvasSize = "Y"
-ScrollingFrame_9.ScrollBarThickness = 0
-
-
-local UICorner_a = Instance.new("UICorner", ScrollingFrame_9)
+local UICorner_a = Instance.new("UICorner", namebox)
 UICorner_a.CornerRadius = UDim.new(0, 4)
 
 
-local UIListLayout_b = Instance.new("UIListLayout", ScrollingFrame_9)
-UIListLayout_b.Padding = UDim.new(0, 4)
+local ScrollingFrame_b = Instance.new("ScrollingFrame", Frame_3)
+ScrollingFrame_b.BorderSizePixel = 0
+ScrollingFrame_b.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollingFrame_b.ElasticBehavior = Enum.ElasticBehavior.Never
+ScrollingFrame_b.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+ScrollingFrame_b.AutomaticCanvasSize = Enum.AutomaticSize.Y
+ScrollingFrame_b.Size = UDim2.new(0, 246, 0, 220)
+ScrollingFrame_b.Position = UDim2.new(0, 8, 0, 72)
+ScrollingFrame_b.ScrollBarThickness = 0
 
-local UIStroke_f = Instance.new("UIStroke", Frame_2)
-UIStroke_f.Transparency = 0.6
-UIStroke_f.Thickness = 2
-UIStroke_f.Color = Color3.fromRGB(255, 255, 255)
+
+local UICorner_e = Instance.new("UICorner", ScrollingFrame_b)
+UICorner_e.CornerRadius = UDim.new(0, 4)
+
+
+local UIListLayout_f = Instance.new("UIListLayout", ScrollingFrame_b)
+UIListLayout_f.Padding = UDim.new(0, 3)
+
+
+local label_10 = Instance.new("TextLabel", ScrollingFrame_b)
+label_10.TextWrapped = true
+label_10.BorderSizePixel = 0
+label_10.TextSize = 14
+label_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+label_10.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+label_10.TextColor3 = Color3.fromRGB(255, 255, 255)
+label_10.BackgroundTransparency = 1
+label_10.Size = UDim2.new(0, 246, 0, 22)
+label_10.Text = [[Emotes Unknown]]
+label_10.Name = [[label]]
+
+
+local reset_11 = Instance.new("TextButton", Frame_3)
+reset_11.TextWrapped = true
+reset_11.BorderSizePixel = 0
+reset_11.TextSize = 15
+reset_11.TextColor3 = Color3.fromRGB(255, 255, 255)
+reset_11.BackgroundColor3 = Color3.fromRGB(93, 93, 93)
+reset_11.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+reset_11.Size = UDim2.new(0, 28, 0, 28)
+reset_11.Text = [[RE]]
+reset_11.Name = [[reset]]
+reset_11.Position = UDim2.new(0, 264, 0, 36)
+
+
+local UICorner_12 = Instance.new("UICorner", reset_11)
+UICorner_12.CornerRadius = UDim.new(0, 4)
+
+
+local Maxmize_13 = Instance.new("TextButton", ScreenGui_1)
+Maxmize_13.TextWrapped = true
+Maxmize_13.RichText = true
+Maxmize_13.BorderSizePixel = 0
+Maxmize_13.TextSize = 15
+Maxmize_13.TextColor3 = Color3.fromRGB(255, 255, 255)
+Maxmize_13.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
+Maxmize_13.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+Maxmize_13.Size = UDim2.new(0, 78, 0, 32)
+Maxmize_13.Text = [[CELVIRUS]]
+Maxmize_13.Name = [[Maxmize]]
+Maxmize_13.Visible = false
+Maxmize_13.Position = UDim2.new(0, 404, 0, 18)
+
+
+local UICorner_14 = Instance.new("UICorner", Maxmize_13)
+
+
+
+local function C_2()
+	local script = LocalScript_2
+	local close = script.Parent.Frame.Close	
+	local main = script.Parent.Frame	
+	local minim = script.Parent.Frame.Minimize	
+	local maxim = script.Parent.Maxmize	
+	local gui = script.Parent	
+	
+	close.MouseButton1Click:Connect(function()	
+	gui:Destroy()	
+	end)	
+	
+	minim.MouseButton1Click:Connect(function()	
+	main.Visible = false	
+	maxim.Visible = true	
+	end)	
+	
+	maxim.MouseButton1Click:Connect(function()	
+	main.Visible = true	
+	maxim.Visible = false	
+	end)	
+	
+	task.spawn(function()	
+	maxim.Draggable = true	
+	end)	
+end
+task.spawn(C_2)
+
+
 
 function Emotes.animate(d)
 	local p=game.Players.LocalPlayer
@@ -113,31 +199,24 @@ function Emotes.animate(d)
 		end
 	end
 	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil
-local b = Instance.new("TextButton", ScrollingFrame_9)
+local b = Instance.new("TextButton", ScrollingFrame_b)
 b.TextWrapped = true
-b.RichText = true
 b.BorderSizePixel = 0
 b.TextSize = 13
 b.TextColor3 = Color3.fromRGB(255, 255, 255)
-b.BackgroundColor3 = Color3.fromRGB(0, 83, 141)
+b.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
 b.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-b.Size = UDim2.new(0, 200, 0, 36)
+b.Size = UDim2.new(1, 0, 0, 40)
 b.Text = d.name
-UICorner_d = Instance.new("UICorner", b)
+
+local UICorner_d = Instance.new("UICorner", b)
 UICorner_d.CornerRadius = UDim.new(0, 4)
-
-
-Frame_e = Instance.new("Frame", b)
-Frame_e.BorderSizePixel = 0
-Frame_e.BackgroundColor3 = Color3.fromRGB(0, 207, 255)
-Frame_e.Size = UDim2.new(1, 0, 0, 3)
-Frame_e.Position = UDim2.new(0, 0, 1, -3)
 
 	local function stop()
 		if cp then cp:Disconnect() cp=nil end
 		if ct then ct:Disconnect() ct=nil end
 		for _,x in ipairs(anims) do if x.Track then x.Track:Stop() x.Track=nil end end
-		isPlay,isTP=false,false b.BackgroundColor3 = Color3.fromRGB(0, 83, 141)
+		isPlay,isTP=false,false b.BackgroundColor3 = Color3.fromRGB(61,61,61)
 		local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=false end
 	end
 
@@ -183,7 +262,7 @@ Frame_e.Position = UDim2.new(0, 0, 1, -3)
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end)
 				if ok and tr then x.Track=tr x.Track.Looped=true x.Track:Play() end
 			end
-			isPlay=true b.BackgroundColor3 = Color3.fromRGB(0, 120, 190)
+			isPlay=true b.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
 			task.delay(d.delay or 0.5,function()
 				if isPlay then for _,x in ipairs(anims)do if x.Track then x.Track:AdjustSpeed(d.speedMult or 1)end end end
 			end)

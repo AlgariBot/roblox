@@ -106,19 +106,6 @@ local UIListLayout_f = Instance.new("UIListLayout", ScrollingFrame_b)
 UIListLayout_f.Padding = UDim.new(0, 3)
 
 
-local label_10 = Instance.new("TextLabel", ScrollingFrame_b)
-label_10.TextWrapped = true
-label_10.BorderSizePixel = 0
-label_10.TextSize = 14
-label_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-label_10.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-label_10.TextColor3 = Color3.fromRGB(255, 255, 255)
-label_10.BackgroundTransparency = 1
-label_10.Size = UDim2.new(0, 246, 0, 22)
-label_10.Text = [[Emotes Unknown]]
-label_10.Name = [[label]]
-
-
 local reset_11 = Instance.new("TextButton", Frame_3)
 reset_11.TextWrapped = true
 reset_11.BorderSizePixel = 0
@@ -208,6 +195,7 @@ b.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
 b.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 b.Size = UDim2.new(1, 0, 0, 40)
 b.Text = d.name
+b.RichText = true
 
 local UICorner_d = Instance.new("UICorner", b)
 UICorner_d.CornerRadius = UDim.new(0, 4)
@@ -274,6 +262,19 @@ UICorner_d.CornerRadius = UDim.new(0, 4)
 		c=p.Character h=c:WaitForChild("Humanoid")
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
 	end)
+end
+
+function Emotes.Label(g)
+local label_10 = Instance.new("TextLabel", ScrollingFrame_b)
+label_10.TextWrapped = true
+label_10.BorderSizePixel = 0
+label_10.TextSize = 14
+label_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+label_10.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+label_10.TextColor3 = Color3.fromRGB(255, 255, 255)
+label_10.BackgroundTransparency = 1
+label_10.Size = UDim2.new(0, 246, 0, 22)
+label_10.Text = g.text
 end
 
 return {Emotes,namebox}

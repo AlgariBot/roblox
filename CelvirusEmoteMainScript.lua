@@ -51,3 +51,11 @@ Emotes.animate({
 	offset1=CFrame.new(0,0,-0.5),offset2=CFrame.new(0,0,-1.4),
 	rotX=0,rotY=0,rotZ=0,speed=10,toggleDelay=0.5,delay=0,speedMult=1
 })
+
+Emotes.animate({
+	name=[[Yoga <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="111755980245826",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-2.2),offset2=CFrame.new(0,0,-1.3),
+	rotX=0,rotY=0,rotZ=0,speed=10,toggleDelay=0.5,delay=0,speedMult=1
+})
+	

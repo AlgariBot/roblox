@@ -3,6 +3,8 @@ local main = loadstring(game:HttpGet("https://raw.githubusercontent.com/AlgariBo
 local Emotes = main[1]
 local namebox = main[2]
 
+Emotes.Label({text="Self animations"})
+
 Emotes.animate({
 	name=[[Blowjob <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
 	anim1="74543120303961",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
@@ -59,3 +61,4 @@ Emotes.animate({
 	rotX=0,rotY=0,rotZ=0,speed=10,toggleDelay=0.5,delay=0,speedMult=1
 })
 	
+Emotes.Label({text="Target Animations"})

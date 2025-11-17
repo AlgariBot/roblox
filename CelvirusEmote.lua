@@ -64,7 +64,7 @@ name_8.TextColor3 = Color3.fromRGB(255, 255, 255)
 name_8.BackgroundTransparency = 1
 name_8.RichText = true
 name_8.Size = UDim2.new(0, 218, 0, 20)
-name_8.Text = [[CEL<font color="rgb(255,128,0)">VIRUS</font> <b>0.2</b>]]
+name_8.Text = [[CEL<font color="rgb(255,128,0)">VIRUS</font> <b>0.3.1</b>]]
 name_8.Name = [[name]]
 name_8.Position = UDim2.new(0, 8, 0, 8)
 
@@ -172,7 +172,6 @@ end
 task.spawn(C_2)
 
 
-
 function Emotes.animate(d)
 	local p=game.Players.LocalPlayer
 	local c=p.Character or p.CharacterAdded:Wait()
@@ -186,28 +185,53 @@ function Emotes.animate(d)
 			table.insert(anims,{Anim=A,Track=nil})
 		end
 	end
-	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil
-local b = Instance.new("TextButton", ScrollingFrame_b)
-b.TextWrapped = true
-b.BorderSizePixel = 0
-b.TextSize = 13
-b.TextColor3 = Color3.fromRGB(255, 255, 255)
-b.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
-b.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-b.Size = UDim2.new(1, 0, 0, 40)
-b.Text = d.name
-b.Name = numbers
-b.RichText = true
 
-local UICorner_d = Instance.new("UICorner", b)
-UICorner_d.CornerRadius = UDim.new(0, 4)
+	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil
+
+	local origCFrame=nil
+	local origState=nil
+	local origSaved=false
+
+	local function saveOriginal()
+		if origSaved then return end
+		local r=c:FindFirstChild("HumanoidRootPart")
+		if r then origCFrame=r.CFrame end
+		if h then origState=h:GetState() end
+		origSaved=true
+	end
+
+	saveOriginal()
+
+	local b=Instance.new("TextButton",ScrollingFrame_b)
+	b.TextWrapped=true
+	b.BorderSizePixel=0
+	b.TextSize=13
+	b.TextColor3=Color3.fromRGB(255,255,255)
+	b.BackgroundColor3=Color3.fromRGB(61,61,61)
+	b.FontFace=Font.new([[rbxasset://fonts/families/GothamSSm.json]],Enum.FontWeight.Bold,Enum.FontStyle.Normal)
+	b.Size=UDim2.new(1,0,0,40)
+	b.Text=d.name
+	b.Name=numbers
+	b.RichText=true
+	local UICorner_d=Instance.new("UICorner",b)
+	UICorner_d.CornerRadius=UDim.new(0,4)
+
+	local function restoreOriginal()
+		local r=c:FindFirstChild("HumanoidRootPart")
+		if r and origCFrame then r.CFrame=origCFrame end
+		if r then r.AssemblyLinearVelocity=Vector3.new() end
+		if h and origState then h:ChangeState(origState) end
+	end
 
 	local function stop()
 		if cp then cp:Disconnect() cp=nil end
 		if ct then ct:Disconnect() ct=nil end
 		for _,x in ipairs(anims) do if x.Track then x.Track:Stop() x.Track=nil end end
-		isPlay,isTP=false,false b.BackgroundColor3 = Color3.fromRGB(61,61,61)
-		local animScript=c:FindFirstChild("Animate") if animScript then animScript.Disabled=false end
+		restoreOriginal()
+		isPlay,isTP=false,false
+		b.BackgroundColor3=Color3.fromRGB(61,61,61)
+		local animScript=c:FindFirstChild("Animate")
+		if animScript then animScript.Disabled=false end
 	end
 
 	local function find(n)
@@ -218,17 +242,29 @@ UICorner_d.CornerRadius = UDim.new(0, 4)
 	end
 
 	local function tp()
-		local r=p.Character and p.Character:FindFirstChild("HumanoidRootPart")
+		local r=c:FindFirstChild("HumanoidRootPart")
 		local tr=t and t.Character and t.Character:FindFirstChild("HumanoidRootPart")
 		if not(r and tr)then return end
 		local last=tick()
+
 		cp=game:GetService("RunService").Stepped:Connect(function(_,dt)
 			if not isTP or not t or not t.Parent then stop() return end
-			local tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart")
+			tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart")
 			if not tr then stop() return end
+			h:ChangeState(11)
+			r.AssemblyLinearVelocity=Vector3.new()
 			local rot=CFrame.Angles(math.rad(d.rotX),math.rad(d.rotY),math.rad(d.rotZ))
-			r.CFrame=r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5))
-			if tick()-last>=(d.toggleDelay or 0.5)then off=(off==d.offset1)and d.offset2 or d.offset1 last=tick() end
+
+			if d.speed>25 then
+				r.CFrame = tr.CFrame*off*rot
+			else
+				r.CFrame = r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5))
+			end
+
+			if tick()-last>=(d.toggleDelay or 0.5)then
+				off=(off==d.offset1)and d.offset2 or d.offset1
+				last=tick()
+			end
 		end)
 	end
 
@@ -236,14 +272,19 @@ UICorner_d.CornerRadius = UDim.new(0, 4)
 		t=find(d.targetBox.Text)
 		if not t then return end
 		if ct then ct:Disconnect() end
-		ct=t.AncestryChanged:Connect(function(_,p)if not p then stop() end end)
+		ct=t.AncestryChanged:Connect(function(_,p2)if not p2 then stop() end end)
 		if t.Character then
 			local th=t.Character:FindFirstChildOfClass("Humanoid")
 			if th then th.Died:Connect(stop) end
 		end
 		t.CharacterAdded:Connect(stop)
-		isTP=not isTP if isTP then tp() end
-		if isPlay then stop() else
+
+		isTP=not isTP
+		if isTP then tp() end
+
+		if isPlay then
+			stop()
+		else
 			local animScript=c:FindFirstChild("Animate")
 			if animScript then animScript.Disabled=true end
 			for _,track in ipairs(h:GetPlayingAnimationTracks()) do track:Stop() end
@@ -252,20 +293,28 @@ UICorner_d.CornerRadius = UDim.new(0, 4)
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end)
 				if ok and tr then x.Track=tr x.Track.Looped=true x.Track:Play() end
 			end
-			isPlay=true b.BackgroundColor3 = Color3.fromRGB(180, 180, 180)
+			isPlay=true
+			b.BackgroundColor3=Color3.fromRGB(180,180,180)
 			task.delay(d.delay or 0.5,function()
-				if isPlay then for _,x in ipairs(anims)do if x.Track then x.Track:AdjustSpeed(d.speedMult or 1)end end end
+				if isPlay then
+					for _,x in ipairs(anims)do
+						if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end
+					end
+				end
 			end)
 		end
 	end)
 
 	p.CharacterAdded:Connect(function()
 		stop()
-		c=p.Character h=c:WaitForChild("Humanoid")
+		c=p.Character
+		h=c:WaitForChild("Humanoid")
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
+		origSaved=false
+		saveOriginal()
 	end)
 
-	numbers = numbers + 1
+	numbers=numbers+1
 end
 
 function Emotes.Label(g)

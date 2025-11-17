@@ -27,6 +27,13 @@ Emotes.animate({
 })
 
 Emotes.animate({
+	name=[[Bent 2 <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
+	anim1="87452671760125",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(0,0,-1.1),offset2=CFrame.new(0,0,-1.8),
+	rotX=0,rotY=-20,rotZ=0,speed=13,toggleDelay=0.6,delay=0,speedMult=1
+})
+
+Emotes.animate({
 	name=[[Stand <font color="rgb(190,190,190)">[Self]</font>]],targetBox=namebox,
 	anim1="127935496272883",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
 	offset1=CFrame.new(0,0,-0.8),offset2=CFrame.new(0,0,-2),
@@ -62,3 +69,10 @@ Emotes.animate({
 })
 	
 Emotes.Label({text="Target Animations"})
+
+Emotes.animate({
+	name=[[Ejaculate <font color="rgb(190,190,190)">[Target]</font>]],targetBox=namebox,
+	anim1="91149775165340",anim2="0",anim3="0",anim4="0",anim5="0",anim6="0",
+	offset1=CFrame.new(1,0,-2.8),offset2=CFrame.new(1,0,-2.8),
+	rotX=0,rotY=-88,rotZ=0,speed=20,toggleDelay=0,delay=0,speedMult=1.4
+})

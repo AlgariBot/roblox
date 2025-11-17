@@ -3,9 +3,7 @@ ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 
 local LocalScript_2 = Instance.new("LocalScript", ScreenGui_1)
-local Emotes = {}
-
-local numbers = 1
+local Emotes = {}; local numbers = 1
 
 local Frame_3 = Instance.new("Frame", ScreenGui_1)
 Frame_3.BorderSizePixel = 0
@@ -173,154 +171,101 @@ task.spawn(C_2)
 
 
 function Emotes.animate(d)
-	local p=game.Players.LocalPlayer
-	local c=p.Character or p.CharacterAdded:Wait()
-	local h=c:WaitForChild("Humanoid")
-	local a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
-	local anims={}
-	for _,id in ipairs({d.anim1,d.anim2,d.anim3,d.anim4,d.anim5,d.anim6}) do
+	local p=game.Players.LocalPlayer;
+	local c=p.Character or p.CharacterAdded:Wait();
+	local h=c:WaitForChild("Humanoid");
+	local a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
+	local anims={};
+	for _,id in ipairs({d.anim1,d.anim2,d.anim3,d.anim4,d.anim5,d.anim6})do
 		if id~="" and id~="0" then
-			local A=Instance.new("Animation")
-			A.AnimationId="rbxassetid://"..id
-			table.insert(anims,{Anim=A,Track=nil})
-		end
-	end
+			local A=Instance.new("Animation");A.AnimationId="rbxassetid://"..id;
+			table.insert(anims,{Anim=A,Track=nil});
+		end;
+	end;
 
-	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil
-
-	local origCFrame=nil
-	local origState=nil
-	local origSaved=false
-
-	local function saveOriginal()
-		if origSaved then return end
-		local r=c:FindFirstChild("HumanoidRootPart")
-		if r then origCFrame=r.CFrame end
-		if h then origState=h:GetState() end
-		origSaved=true
-	end
-
-	saveOriginal()
-
-	local b=Instance.new("TextButton",ScrollingFrame_b)
-	b.TextWrapped=true
-	b.BorderSizePixel=0
-	b.TextSize=13
-	b.TextColor3=Color3.fromRGB(255,255,255)
-	b.BackgroundColor3=Color3.fromRGB(61,61,61)
-	b.FontFace=Font.new([[rbxasset://fonts/families/GothamSSm.json]],Enum.FontWeight.Bold,Enum.FontStyle.Normal)
-	b.Size=UDim2.new(1,0,0,40)
-	b.Text=d.name
-	b.Name=numbers
-	b.RichText=true
-	local UICorner_d=Instance.new("UICorner",b)
-	UICorner_d.CornerRadius=UDim.new(0,4)
+	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil;
 
 	local function restoreOriginal()
-		local r=c:FindFirstChild("HumanoidRootPart")
-		if r and origCFrame then r.CFrame=origCFrame end
-		if r then r.AssemblyLinearVelocity=Vector3.new() end
-		if h and origState then h:ChangeState(origState) end
-	end
+		local r=c:FindFirstChild("HumanoidRootPart");if r then r.AssemblyLinearVelocity=Vector3.new() end;
+	end;
+
+	local b=Instance.new("TextButton",ScrollingFrame_b);
+	b.TextWrapped=true;b.BorderSizePixel=0;b.TextSize=13;
+	b.TextColor3=Color3.fromRGB(255,255,255);b.BackgroundColor3=Color3.fromRGB(61,61,61);
+	b.FontFace=Font.new([[rbxasset://fonts/families/GothamSSm.json]],Enum.FontWeight.Bold,Enum.FontStyle.Normal);
+	b.Size=UDim2.new(1,0,0,40);b.Text=d.name;b.Name=numbers.."buttons";b.RichText=true;
+	Instance.new("UICorner",b).CornerRadius=UDim.new(0,4);
 
 	local function stop()
-		if cp then cp:Disconnect() cp=nil end
-		if ct then ct:Disconnect() ct=nil end
-		for _,x in ipairs(anims) do if x.Track then x.Track:Stop() x.Track=nil end end
-		restoreOriginal()
-		isPlay,isTP=false,false
-		b.BackgroundColor3=Color3.fromRGB(61,61,61)
-		local animScript=c:FindFirstChild("Animate")
-		if animScript then animScript.Disabled=false end
-	end
+		if cp then cp:Disconnect();cp=nil end;
+		if ct then ct:Disconnect();ct=nil end;
+		for _,x in ipairs(anims)do if x.Track then x.Track:Stop();x.Track=nil end end;
+		restoreOriginal();isPlay,isTP=false,false;
+		b.BackgroundColor3=Color3.fromRGB(61,61,61);
+		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
+	end;
 
 	local function find(n)
-		n=n:lower()
-		for _,pl in ipairs(game.Players:GetPlayers()) do
-			if pl.Name:lower():sub(1,#n)==n or pl.DisplayName:lower():sub(1,#n)==n then return pl end
-		end
-	end
+		n=n:lower();
+		for _,pl in ipairs(game.Players:GetPlayers())do
+			if pl.Name:lower():sub(1,#n)==n or pl.DisplayName:lower():sub(1,#n)==n then return pl end;
+		end;
+	end;
 
 	local function tp()
-		local r=c:FindFirstChild("HumanoidRootPart")
-		local tr=t and t.Character and t.Character:FindFirstChild("HumanoidRootPart")
-		if not(r and tr)then return end
-		local last=tick()
-
+		local r=c:FindFirstChild("HumanoidRootPart");
+		local tr=t and t.Character and t.Character:FindFirstChild("HumanoidRootPart");
+		if not(r and tr)then return end;
+		local last=tick();
 		cp=game:GetService("RunService").Stepped:Connect(function(_,dt)
-			if not isTP or not t or not t.Parent then stop() return end
-			tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart")
-			if not tr then stop() return end
-			h:ChangeState(11)
-			r.AssemblyLinearVelocity=Vector3.new()
-			local rot=CFrame.Angles(math.rad(d.rotX),math.rad(d.rotY),math.rad(d.rotZ))
-
-			if d.speed>25 then
-				r.CFrame = tr.CFrame*off*rot
-			else
-				r.CFrame = r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5))
-			end
-
+			if not isTP or not t or not t.Parent then stop()return end;
+			tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart");
+			if not tr then stop()return end;
+			h:ChangeState(11);r.AssemblyLinearVelocity=Vector3.new();
+			local rot=CFrame.Angles(math.rad(d.rotX),math.rad(d.rotY),math.rad(d.rotZ));
+			if d.speed>25 then r.CFrame=tr.CFrame*off*rot else
+				r.CFrame=r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5));
+			end;
 			if tick()-last>=(d.toggleDelay or 0.5)then
-				off=(off==d.offset1)and d.offset2 or d.offset1
-				last=tick()
-			end
-		end)
-	end
+				off=(off==d.offset1)and d.offset2 or d.offset1;last=tick();
+			end;
+		end);
+	end;
 
 	b.MouseButton1Click:Connect(function()
-		t=find(d.targetBox.Text)
-		if not t then return end
-		if ct then ct:Disconnect() end
-		ct=t.AncestryChanged:Connect(function(_,p2)if not p2 then stop() end end)
-		if t.Character then
-			local th=t.Character:FindFirstChildOfClass("Humanoid")
-			if th then th.Died:Connect(stop) end
-		end
-		t.CharacterAdded:Connect(stop)
-
-		isTP=not isTP
-		if isTP then tp() end
-
-		if isPlay then
-			stop()
-		else
-			local animScript=c:FindFirstChild("Animate")
-			if animScript then animScript.Disabled=true end
-			for _,track in ipairs(h:GetPlayingAnimationTracks()) do track:Stop() end
-			task.wait(0.1)
+		t=find(d.targetBox.Text);if not t then return end;
+		if ct then ct:Disconnect() end;
+		ct=t.AncestryChanged:Connect(function(_,p2)if not p2 then stop() end end);
+		if t.Character then local th=t.Character:FindFirstChildOfClass("Humanoid");if th then th.Died:Connect(stop) end end;
+		t.CharacterAdded:Connect(stop);
+		isTP=not isTP;if isTP then tp() end;
+		if isPlay then stop() else
+			local s=c:FindFirstChild("Animate");if s then s.Disabled=true end;
+			for _,track in ipairs(h:GetPlayingAnimationTracks())do track:Stop() end;
+			task.wait(0.1);
 			for _,x in ipairs(anims)do
-				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end)
-				if ok and tr then x.Track=tr x.Track.Looped=true x.Track:Play() end
-			end
-			isPlay=true
-			b.BackgroundColor3=Color3.fromRGB(180,180,180)
+				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
+				if ok and tr then x.Track=tr;x.Track.Looped=true;x.Track:Play() end;
+			end;
+			isPlay=true;b.BackgroundColor3=Color3.fromRGB(180,180,180);
 			task.delay(d.delay or 0.5,function()
-				if isPlay then
-					for _,x in ipairs(anims)do
-						if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end
-					end
-				end
-			end)
-		end
-	end)
+				if isPlay then for _,x in ipairs(anims)do if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end end end;
+			end);
+		end;
+	end);
 
 	p.CharacterAdded:Connect(function()
-		stop()
-		c=p.Character
-		h=c:WaitForChild("Humanoid")
-		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
-		origSaved=false
-		saveOriginal()
-	end)
+		stop();c=p.Character;h=c:WaitForChild("Humanoid");
+		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
+	end);
 
-	numbers=numbers+1
-end
+	numbers=numbers+1;
+end;
 
 function Emotes.Label(g)
 local label_10 = Instance.new("TextLabel", ScrollingFrame_b)
 label_10.TextWrapped = true
-label_10.Name = numbers
+label_10.Name = numbers.."label"
 label_10.BorderSizePixel = 0
 label_10.TextSize = 14
 label_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)

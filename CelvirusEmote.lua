@@ -5,6 +5,7 @@ ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 local LocalScript_2 = Instance.new("LocalScript", ScreenGui_1)
 local Emotes = {}
 
+local numbers = 1
 
 local Frame_3 = Instance.new("Frame", ScreenGui_1)
 Frame_3.BorderSizePixel = 0
@@ -195,6 +196,7 @@ b.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
 b.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
 b.Size = UDim2.new(1, 0, 0, 40)
 b.Text = d.name
+b.Name = numbers
 b.RichText = true
 
 local UICorner_d = Instance.new("UICorner", b)
@@ -262,11 +264,14 @@ UICorner_d.CornerRadius = UDim.new(0, 4)
 		c=p.Character h=c:WaitForChild("Humanoid")
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h)
 	end)
+
+	numbers = numbers + 1
 end
 
 function Emotes.Label(g)
 local label_10 = Instance.new("TextLabel", ScrollingFrame_b)
 label_10.TextWrapped = true
+label_10.Name = numbers
 label_10.BorderSizePixel = 0
 label_10.TextSize = 14
 label_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -275,6 +280,8 @@ label_10.TextColor3 = Color3.fromRGB(255, 255, 255)
 label_10.BackgroundTransparency = 1
 label_10.Size = UDim2.new(0, 246, 0, 22)
 label_10.Text = g.text
+
+	numbers = numbers + 1
 end
 
 return {Emotes,namebox}

@@ -6,11 +6,6 @@ ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local numbers = 0
 
-
-local script_2 = Instance.new("LocalScript", ScreenGui_1)
-script_2.Name = [[script]]
-
-
 local mainframe_3 = Instance.new("Frame", ScreenGui_1)
 mainframe_3.BorderSizePixel = 0
 mainframe_3.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
@@ -163,8 +158,6 @@ scrolllabel_15.Position = UDim2.new(0, -2, 0, 0)
 
 local UIDragDetector_16 = Instance.new("UIDragDetector", mainframe_3)
 
-
-
 local maxmize_17 = Instance.new("TextButton", ScreenGui_1)
 maxmize_17.TextWrapped = true
 maxmize_17.BorderSizePixel = 0
@@ -196,62 +189,25 @@ UIStroke_1a.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UIStroke_1a.Thickness = 4
 UIStroke_1a.Color = Color3.fromRGB(36, 36, 36)
 
-
-local function C_2()
-	local script = script_2
-	local maxmize = script.Parent.maxmize	
-	local minimize = script.Parent.mainframe.minimize	
-	local main = script.Parent	
-	local mainframe = script.Parent.mainframe	
-	local destroybutton = script.Parent.mainframe.destroyui	
+local function scriptui()	
+	maxmize_17.Draggable = true	
 	
-	maxmize.Draggable = true	
-	
-	destroybutton.MouseButton1Click:Connect(function()	
-	mainframe:Destroy()	
+	destroyui_7.MouseButton1Click:Connect(function()	
+	ScreenGui_1:Destroy()
 	end)	
 	
-	maxmize.MouseButton1Click:Connect(function()	
-	mainframe.Visible = true	
-	maxmize.Visible = false	
+	maxmize_17.MouseButton1Click:Connect(function()	
+	mainframe_3.Visible = true	
+	maxmize_17.Visible = false	
 	end)	
 	
-	minimize.MouseButton1Click:Connect(function()	
-	mainframe.Visible = false	
-	maxmize.Visible = true	
+	minimize_d.MouseButton1Click:Connect(function()	
+	mainframe_3.Visible = false	
+	maxmize_17.Visible = true	
 	end)	
 end
-task.spawn(C_2)
+task.spawn(scriptui)
 
-
-
-local function C_2()
-	local script = LocalScript_2
-	local close = script.Parent.Frame.Close	
-	local main = script.Parent.Frame	
-	local minim = script.Parent.Frame.Minimize	
-	local maxim = script.Parent.Maxmize	
-	local gui = script.Parent	
-	
-	close.MouseButton1Click:Connect(function()	
-	gui:Destroy()	
-	end)	
-	
-	minim.MouseButton1Click:Connect(function()	
-	main.Visible = false	
-	maxim.Visible = true	
-	end)	
-	
-	maxim.MouseButton1Click:Connect(function()	
-	main.Visible = true	
-	maxim.Visible = false	
-	end)	
-	
-	task.spawn(function()	
-	maxim.Draggable = true	
-	end)	
-end
-task.spawn(C_2)
 
 
 function Emotes.animate(d)

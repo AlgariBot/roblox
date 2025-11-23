@@ -324,7 +324,7 @@ UIStroke_13.Color = Color3.fromRGB(59, 59, 59)
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
 				if ok and tr then x.Track=tr;x.Track.Looped=true;x.Track:Play() end;
 			end;
-			isPlay=true;UIStroke_13.Color = Color3.fromRGB(0, 70, 190);
+			isPlay=true;UIStroke_13.Color = Color3.fromRGB(0, 90, 190); b.BackgroundColor3 = Color3.fromRGB(0, 100, 210);
 			task.delay(d.delay or 0.5,function()
 				if isPlay then for _,x in ipairs(anims)do if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end end end;
 			end);
@@ -341,7 +341,7 @@ end;
 
 local viewstate = false
 
-local target = namebox; local lp=game.Players.LocalPlayer; local cam=workspace.CurrentCamera
+local target = namebox.Text; local lp=game.Players.LocalPlayer; local cam=workspace.CurrentCamera
 local cons={}; local on=false
 
 local function stopview()
@@ -380,7 +380,7 @@ viewtoggle_4.MouseButton1Click:Connect(function()
 			UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
 			stopview()
 		else
-			UIStroke_6.Color = Color3.fromRGB(0, 120, 0)
+			UIStroke_6.Color = Color3.fromRGB(0, 120, 200)
 			view()
 		end
 	end)

@@ -5,6 +5,7 @@ ScreenGui_1.ResetOnSpawn = false
 ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local numbers = 0
+local Emotes = {}
 
 local mainframe_3 = Instance.new("Frame", ScreenGui_1)
 mainframe_3.BorderSizePixel = 0
@@ -328,7 +329,7 @@ viewtoggle_4.MouseButton1Click:Connect(function()
 		if viewstate then
 			UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
 		else
-			UIStroke_6.Color = Color3.fromRGB(120, 120, 120)
+			UIStroke_6.Color = Color3.fromRGB(0, 120, 0)
 		end
 	end)
 

@@ -1,84 +1,82 @@
 local ScreenGui_1 = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+ScreenGui_1.DisplayOrder = 20
+ScreenGui_1.Name = "CelvirusSex"
+ScreenGui_1.ResetOnSpawn = false
 ScreenGui_1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
-
-local LocalScript_2 = Instance.new("LocalScript", ScreenGui_1)
-local Emotes = {}; local numbers = 1
-
-local Frame_3 = Instance.new("Frame", ScreenGui_1)
-Frame_3.BorderSizePixel = 0
-Frame_3.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-Frame_3.Size = UDim2.new(0, 300, 0, 302)
-Frame_3.Position = UDim2.new(0, 238, 0, 74)
+local numbers = 0
 
 
-local Close_4 = Instance.new("TextButton", Frame_3)
-Close_4.TextWrapped = true
-Close_4.RichText = true
-Close_4.BorderSizePixel = 0
-Close_4.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-Close_4.TextSize = 15
-Close_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-Close_4.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Close_4.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
-Close_4.BackgroundTransparency = 1
-Close_4.Size = UDim2.new(0, 20, 0, 20)
-Close_4.Text = [[<b>╳</b>]]
-Close_4.Name = [[Close]]
-Close_4.Position = UDim2.new(0, 238, 0, 6)
+local script_2 = Instance.new("LocalScript", ScreenGui_1)
+script_2.Name = [[script]]
 
 
-local UICorner_5 = Instance.new("UICorner", Frame_3)
+local mainframe_3 = Instance.new("Frame", ScreenGui_1)
+mainframe_3.BorderSizePixel = 0
+mainframe_3.BackgroundColor3 = Color3.fromRGB(36, 36, 36)
+mainframe_3.Size = UDim2.new(0, 298, 0, 334)
+mainframe_3.Position = UDim2.new(0, 164, 0, 56)
+mainframe_3.Name = [[mainframe]]
+
+
+local viewtoggle_4 = Instance.new("TextButton", mainframe_3)
+viewtoggle_4.TextWrapped = true
+viewtoggle_4.BorderSizePixel = 0
+viewtoggle_4.TextSize = 18
+viewtoggle_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+viewtoggle_4.BackgroundColor3 = Color3.fromRGB(62, 62, 62)
+viewtoggle_4.FontFace = Font.new([[rbxasset://fonts/families/RobotoMono.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+viewtoggle_4.Size = UDim2.new(0, 28, 0, 28)
+viewtoggle_4.Text = [[▶]]
+viewtoggle_4.Name = [[viewtoggle]]
+viewtoggle_4.Position = UDim2.new(0, 262, 0, 32)
+
+
+local UICorner_5 = Instance.new("UICorner", viewtoggle_4)
 UICorner_5.CornerRadius = UDim.new(0, 4)
 
 
-local Minimize_6 = Instance.new("TextButton", Frame_3)
-Minimize_6.TextWrapped = true
-Minimize_6.BorderSizePixel = 0
-Minimize_6.TextStrokeColor3 = Color3.fromRGB(255, 255, 255)
-Minimize_6.TextSize = 15
-Minimize_6.TextColor3 = Color3.fromRGB(255, 255, 255)
-Minimize_6.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-Minimize_6.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Minimize_6.BackgroundTransparency = 1
-Minimize_6.Size = UDim2.new(0, 20, 0, 20)
-Minimize_6.Text = [[━]]
-Minimize_6.Name = [[Minimize]]
-Minimize_6.Position = UDim2.new(0, 274, 0, 6)
+local UIStroke_6 = Instance.new("UIStroke", viewtoggle_4)
+UIStroke_6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_6.Thickness = 2
+UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
 
 
-local UIDragDetector_7 = Instance.new("UIDragDetector", Frame_3)
+local destroyui_7 = Instance.new("TextButton", mainframe_3)
+destroyui_7.TextWrapped = true
+destroyui_7.BorderSizePixel = 0
+destroyui_7.TextSize = 16
+destroyui_7.TextColor3 = Color3.fromRGB(255, 255, 255)
+destroyui_7.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+destroyui_7.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+destroyui_7.BackgroundTransparency = 1
+destroyui_7.Size = UDim2.new(0, 24, 0, 24)
+destroyui_7.Text = [[╳]]
+destroyui_7.Name = [[destroyui]]
+destroyui_7.Position = UDim2.new(0, 272, 0, 2)
 
 
-
-local name_8 = Instance.new("TextLabel", Frame_3)
-name_8.TextWrapped = true
-name_8.BorderSizePixel = 0
-name_8.TextSize = 15
-name_8.TextXAlignment = Enum.TextXAlignment.Left
-name_8.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-name_8.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-name_8.TextColor3 = Color3.fromRGB(255, 255, 255)
-name_8.BackgroundTransparency = 1
-name_8.RichText = true
-name_8.Size = UDim2.new(0, 218, 0, 20)
-name_8.Text = [[CEL<font color="rgb(255,128,0)">VIRUS</font> <b>0.3.1</b>]]
-name_8.Name = [[name]]
-name_8.Position = UDim2.new(0, 8, 0, 8)
+local mainstroke_8 = Instance.new("UIStroke", mainframe_3)
+mainstroke_8.Transparency = 0.8
+mainstroke_8.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+mainstroke_8.Name = [[mainstroke]]
+mainstroke_8.Thickness = 4
+mainstroke_8.Color = Color3.fromRGB(36, 36, 36)
 
 
-local namebox = Instance.new("TextBox", Frame_3)
+local namebox = Instance.new("TextBox", mainframe_3)
 namebox.Name = [[namebox]]
 namebox.TextXAlignment = Enum.TextXAlignment.Left
+namebox.PlaceholderColor3 = Color3.fromRGB(179, 179, 179)
 namebox.BorderSizePixel = 0
 namebox.TextWrapped = true
-namebox.TextSize = 13
-namebox.TextColor3 = Color3.fromRGB(255, 255, 255)
-namebox.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
-namebox.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-namebox.PlaceholderText = [[Target]]
-namebox.Size = UDim2.new(0, 246, 0, 26)
-namebox.Position = UDim2.new(0, 8, 0, 36)
+namebox.TextSize = 14
+namebox.TextColor3 = Color3.fromRGB(255, 249, 249)
+namebox.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
+namebox.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+namebox.PlaceholderText = [[Target Name/Display Name]]
+namebox.Size = UDim2.new(0, 248, 0, 28)
+namebox.Position = UDim2.new(0, 6, 0, 32)
 namebox.Text = [[]]
 
 
@@ -86,58 +84,144 @@ local UICorner_a = Instance.new("UICorner", namebox)
 UICorner_a.CornerRadius = UDim.new(0, 4)
 
 
-local ScrollingFrame_b = Instance.new("ScrollingFrame", Frame_3)
-ScrollingFrame_b.BorderSizePixel = 0
-ScrollingFrame_b.CanvasSize = UDim2.new(0, 0, 0, 0)
-ScrollingFrame_b.ElasticBehavior = Enum.ElasticBehavior.Never
-ScrollingFrame_b.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
-ScrollingFrame_b.AutomaticCanvasSize = Enum.AutomaticSize.Y
-ScrollingFrame_b.Size = UDim2.new(0, 246, 0, 220)
-ScrollingFrame_b.Position = UDim2.new(0, 8, 0, 72)
-ScrollingFrame_b.ScrollBarThickness = 0
+local UIStroke_b = Instance.new("UIStroke", namebox)
+UIStroke_b.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_b.Thickness = 2
+UIStroke_b.Color = Color3.fromRGB(61, 61, 61)
 
 
-local UICorner_e = Instance.new("UICorner", ScrollingFrame_b)
-UICorner_e.CornerRadius = UDim.new(0, 4)
+local UICorner_c = Instance.new("UICorner", mainframe_3)
+UICorner_c.CornerRadius = UDim.new(0, 4)
 
 
-local UIListLayout_f = Instance.new("UIListLayout", ScrollingFrame_b)
-UIListLayout_f.Padding = UDim.new(0, 3)
+local minimize_d = Instance.new("TextButton", mainframe_3)
+minimize_d.TextWrapped = true
+minimize_d.BorderSizePixel = 0
+minimize_d.TextSize = 16
+minimize_d.TextColor3 = Color3.fromRGB(255, 255, 255)
+minimize_d.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+minimize_d.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Heavy, Enum.FontStyle.Normal)
+minimize_d.BackgroundTransparency = 1
+minimize_d.Size = UDim2.new(0, 24, 0, 24)
+minimize_d.Text = [[━]]
+minimize_d.Name = [[minimize]]
+minimize_d.Position = UDim2.new(0, 236, 0, 2)
 
 
-local reset_11 = Instance.new("TextButton", Frame_3)
-reset_11.TextWrapped = true
-reset_11.BorderSizePixel = 0
-reset_11.TextSize = 15
-reset_11.TextColor3 = Color3.fromRGB(255, 255, 255)
-reset_11.BackgroundColor3 = Color3.fromRGB(93, 93, 93)
-reset_11.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-reset_11.Size = UDim2.new(0, 28, 0, 28)
-reset_11.Text = [[RE]]
-reset_11.Name = [[reset]]
-reset_11.Position = UDim2.new(0, 264, 0, 36)
+local uiname_e = Instance.new("TextLabel", mainframe_3)
+uiname_e.TextWrapped = true
+uiname_e.BorderSizePixel = 0
+uiname_e.TextSize = 16
+uiname_e.TextXAlignment = Enum.TextXAlignment.Left
+uiname_e.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+uiname_e.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+uiname_e.TextColor3 = Color3.fromRGB(255, 253, 253)
+uiname_e.BackgroundTransparency = 1
+uiname_e.Size = UDim2.new(0, 222, 0, 20)
+uiname_e.Text = [[CelVirus | S 0.3.2UI]]
+uiname_e.Name = [[uiname]]
+uiname_e.Position = UDim2.new(0, 6, 0, 6)
 
 
-local UICorner_12 = Instance.new("UICorner", reset_11)
-UICorner_12.CornerRadius = UDim.new(0, 4)
+local UIStroke_f = Instance.new("UIStroke", mainframe_3)
+UIStroke_f.Transparency = 0.6
+UIStroke_f.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_f.Thickness = 2
+UIStroke_f.Color = Color3.fromRGB(48, 48, 48)
 
 
-local Maxmize_13 = Instance.new("TextButton", ScreenGui_1)
-Maxmize_13.TextWrapped = true
-Maxmize_13.RichText = true
-Maxmize_13.BorderSizePixel = 0
-Maxmize_13.TextSize = 15
-Maxmize_13.TextColor3 = Color3.fromRGB(255, 255, 255)
-Maxmize_13.BackgroundColor3 = Color3.fromRGB(61, 61, 61)
-Maxmize_13.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-Maxmize_13.Size = UDim2.new(0, 78, 0, 32)
-Maxmize_13.Text = [[CELVIRUS]]
-Maxmize_13.Name = [[Maxmize]]
-Maxmize_13.Visible = false
-Maxmize_13.Position = UDim2.new(0, 404, 0, 18)
+local ScrollingFrame_10 = Instance.new("ScrollingFrame", mainframe_3)
+ScrollingFrame_10.ScrollingDirection = Enum.ScrollingDirection.Y
+ScrollingFrame_10.BorderSizePixel = 0
+ScrollingFrame_10.CanvasSize = UDim2.new(0, 0, 0, 0)
+ScrollingFrame_10.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ScrollingFrame_10.AutomaticCanvasSize = Enum.AutomaticSize.Y
+ScrollingFrame_10.Size = UDim2.new(0, 250, 0, 262)
+ScrollingFrame_10.Position = UDim2.new(0, 6, 0, 66)
+ScrollingFrame_10.ScrollBarThickness = 0
+ScrollingFrame_10.BackgroundTransparency = 1
 
 
-local UICorner_14 = Instance.new("UICorner", Maxmize_13)
+local UIListLayout_14 = Instance.new("UIListLayout", ScrollingFrame_10)
+UIListLayout_14.HorizontalAlignment = Enum.HorizontalAlignment.Center
+UIListLayout_14.Padding = UDim.new(0, 7)
+
+
+local scrolllabel_15 = Instance.new("TextLabel", ScrollingFrame_10)
+scrolllabel_15.TextWrapped = true
+scrolllabel_15.BorderSizePixel = 0
+scrolllabel_15.TextSize = 15
+scrolllabel_15.TextXAlignment = Enum.TextXAlignment.Left
+scrolllabel_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+scrolllabel_15.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+scrolllabel_15.TextColor3 = Color3.fromRGB(255, 255, 255)
+scrolllabel_15.BackgroundTransparency = 0.8
+scrolllabel_15.Size = UDim2.new(0, 238, 0, 18)
+scrolllabel_15.Name = [[scrolllabel]]
+scrolllabel_15.Position = UDim2.new(0, -2, 0, 0)
+
+
+local UIDragDetector_16 = Instance.new("UIDragDetector", mainframe_3)
+
+
+
+local maxmize_17 = Instance.new("TextButton", ScreenGui_1)
+maxmize_17.TextWrapped = true
+maxmize_17.BorderSizePixel = 0
+maxmize_17.TextSize = 20
+maxmize_17.TextColor3 = Color3.fromRGB(255, 255, 255)
+maxmize_17.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+maxmize_17.FontFace = Font.new([[rbxasset://fonts/families/GothamSSm.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+maxmize_17.Size = UDim2.new(0, 50, 0, 50)
+maxmize_17.Text = [[CX]]
+maxmize_17.Name = [[maxmize]]
+maxmize_17.Visible = false
+maxmize_17.Position = UDim2.new(0, 108, 0, 42)
+
+
+local UICorner_18 = Instance.new("UICorner", maxmize_17)
+UICorner_18.CornerRadius = UDim.new(1, 0)
+
+
+local UIStroke_19 = Instance.new("UIStroke", maxmize_17)
+UIStroke_19.Transparency = 0.6
+UIStroke_19.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_19.Thickness = 2
+UIStroke_19.Color = Color3.fromRGB(52, 52, 52)
+
+
+local UIStroke_1a = Instance.new("UIStroke", maxmize_17)
+UIStroke_1a.Transparency = 0.8
+UIStroke_1a.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_1a.Thickness = 4
+UIStroke_1a.Color = Color3.fromRGB(36, 36, 36)
+
+
+local function C_2()
+	local script = script_2
+	local maxmize = script.Parent.maxmize	
+	local minimize = script.Parent.mainframe.minimize	
+	local main = script.Parent	
+	local mainframe = script.Parent.mainframe	
+	local destroybutton = script.Parent.mainframe.destroyui	
+	
+	maxmize.Draggable = true	
+	
+	destroybutton.MouseButton1Click:Connect(function()	
+	mainframe:Destroy()	
+	end)	
+	
+	maxmize.MouseButton1Click:Connect(function()	
+	mainframe.Visible = true	
+	maxmize.Visible = false	
+	end)	
+	
+	minimize.MouseButton1Click:Connect(function()	
+	mainframe.Visible = false	
+	maxmize.Visible = true	
+	end)	
+end
+task.spawn(C_2)
 
 
 
@@ -188,20 +272,39 @@ function Emotes.animate(d)
 	local function restoreOriginal()
 		local r=c:FindFirstChild("HumanoidRootPart");if r then r.AssemblyLinearVelocity=Vector3.new() end;
 	end;
+--
+local b = Instance.new("TextButton", ScrollingFrame_10)
+b.TextWrapped = true
+b.BorderSizePixel = 0
+b.TextXAlignment = Enum.TextXAlignment.Left
+b.TextSize = 15
+b.TextColor3 = Color3.fromRGB(255, 255, 255)
+b.TextYAlignment = Enum.TextYAlignment.Top
+b.BackgroundColor3 = Color3.fromRGB(47, 47, 47)
+b.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+b.AutomaticSize = Enum.AutomaticSize.Y
+b.Size = UDim2.new(0, 238, 0, 28)
+b.Text = d.name
+b.Name = "emotetoggle_"..numbers
+b.Position = UDim2.new(0, 2, 0, 2)
 
-	local b=Instance.new("TextButton",ScrollingFrame_b);
-	b.TextWrapped=true;b.BorderSizePixel=0;b.TextSize=13;
-	b.TextColor3=Color3.fromRGB(255,255,255);b.BackgroundColor3=Color3.fromRGB(61,61,61);
-	b.FontFace=Font.new([[rbxasset://fonts/families/GothamSSm.json]],Enum.FontWeight.Bold,Enum.FontStyle.Normal);
-	b.Size=UDim2.new(1,0,0,40);b.Text=d.name;b.Name=numbers.."buttons";b.RichText=true;
-	Instance.new("UICorner",b).CornerRadius=UDim.new(0,4);
+
+local UICorner_12 = Instance.new("UICorner", b)
+UICorner_12.CornerRadius = UDim.new(0, 4)
+
+
+local UIStroke_13 = Instance.new("UIStroke", b)
+UIStroke_13.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+UIStroke_13.Thickness = 2
+UIStroke_13.Color = Color3.fromRGB(59, 59, 59)
+--
 
 	local function stop()
 		if cp then cp:Disconnect();cp=nil end;
 		if ct then ct:Disconnect();ct=nil end;
 		for _,x in ipairs(anims)do if x.Track then x.Track:Stop();x.Track=nil end end;
 		restoreOriginal();isPlay,isTP=false,false;
-		b.BackgroundColor3=Color3.fromRGB(61,61,61);
+		UIStroke_13.Color = Color3.fromRGB(59, 59, 59);
 		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
 	end;
 
@@ -247,7 +350,7 @@ function Emotes.animate(d)
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
 				if ok and tr then x.Track=tr;x.Track.Looped=true;x.Track:Play() end;
 			end;
-			isPlay=true;b.BackgroundColor3=Color3.fromRGB(180,180,180);
+			isPlay=true;UIStroke_13.Color = Color3.fromRGB(0, 70, 190);
 			task.delay(d.delay or 0.5,function()
 				if isPlay then for _,x in ipairs(anims)do if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end end end;
 			end);
@@ -263,18 +366,19 @@ function Emotes.animate(d)
 end;
 
 function Emotes.Label(g)
-local label_10 = Instance.new("TextLabel", ScrollingFrame_b)
-label_10.TextWrapped = true
-label_10.Name = numbers.."label"
-label_10.BorderSizePixel = 0
-label_10.TextSize = 14
-label_10.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-label_10.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-label_10.TextColor3 = Color3.fromRGB(255, 255, 255)
-label_10.BackgroundTransparency = 1
-label_10.Size = UDim2.new(0, 246, 0, 22)
-label_10.Text = g.text
-
+local scrolllabel_15 = Instance.new("TextLabel", ScrollingFrame_10)
+scrolllabel_15.TextWrapped = true
+scrolllabel_15.BorderSizePixel = 0
+scrolllabel_15.TextSize = 15
+scrolllabel_15.TextXAlignment = Enum.TextXAlignment.Left
+scrolllabel_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+scrolllabel_15.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+scrolllabel_15.TextColor3 = Color3.fromRGB(255, 255, 255)
+scrolllabel_15.BackgroundTransparency = 0.8
+scrolllabel_15.Size = UDim2.new(0, 238, 0, 18)
+scrolllabel_15.Name = "labels_"..numbers
+scrolllabel_15.Text = g.text
+scrolllabel_15.Position = UDim2.new(0, -2, 0, 0)
 	numbers = numbers + 1
 end
 

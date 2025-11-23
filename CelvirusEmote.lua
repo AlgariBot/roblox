@@ -330,7 +330,7 @@ viewtoggle_4.MouseButton1Click:Connect(function()
 		else
 			UIStroke_6.Color = Color3.fromRGB(120, 120, 120)
 		end
-	end
+	end)
 
 function Emotes.Label(g)
 local scrolllabel_15 = Instance.new("TextLabel", ScrollingFrame_10)

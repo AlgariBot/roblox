@@ -39,7 +39,7 @@ UICorner_5.CornerRadius = UDim.new(0, 4)
 local UIStroke_6 = Instance.new("UIStroke", viewtoggle_4)
 UIStroke_6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 UIStroke_6.Thickness = 2
-UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
+UIStroke_6.Color = Color3.fromRGB(120, 120, 120)
 
 
 local destroyui_7 = Instance.new("TextButton", mainframe_3)
@@ -365,6 +365,17 @@ UIStroke_13.Color = Color3.fromRGB(59, 59, 59)
 	numbers=numbers+1;
 end;
 
+local viewstate = false
+
+viewtoggle_4.MouseButton1Click:Connect(function()
+		viewstate = not viewstate
+		if viewstate then
+			UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
+		else
+			UIStroke_6.Color = Color3.fromRGB(120, 120, 120)
+		end
+	end
+
 function Emotes.Label(g)
 local scrolllabel_15 = Instance.new("TextLabel", ScrollingFrame_10)
 scrolllabel_15.TextWrapped = true
@@ -381,5 +392,39 @@ scrolllabel_15.Text = g.text
 scrolllabel_15.Position = UDim2.new(0, -2, 0, 0)
 	numbers = numbers + 1
 end
+
+local target = namebox; local lp=game.Players.LocalPlayer; local cam=workspace.CurrentCamera
+local cons={}; local on=false
+
+local function stopview()
+	on=false; for _,c in pairs(cons) do c:Disconnect() end
+	local h=lp.Character and lp.Character:FindFirstChild("Humanoid")
+	if h then cam.CameraSubject=h end
+end
+
+local function find()
+	local s=target:lower()
+	for _,v in pairs(game.Players:GetPlayers()) do
+		if v~=lp then
+			local a=v.Name:lower(); local b=v.DisplayName:lower()
+			if a:find(s) or b:find(s) then return v end
+		end
+	end
+end
+
+local function view()
+	if on then return end
+	local t=find(); if not t then return end
+	on=true
+	local c=t.Character or t.CharacterAdded:Wait(); local h=c:FindFirstChild("Humanoid")
+	if not h then stopview() return end
+	cam.CameraSubject=h
+	cons[1]=t.CharacterAdded:Connect(function(ch)
+		local h2=ch:FindFirstChild("Humanoid"); if h2 then cam.CameraSubject=h2 else stopview() end
+	end)
+	cons[2]=t.CharacterRemoving:Connect(stopview)
+	cons[3]=t.AncestryChanged:Connect(function(_,p) if not p then stopview() end end)
+end
+
 
 return {Emotes,namebox}

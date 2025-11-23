@@ -209,6 +209,22 @@ local function scriptui()
 end
 task.spawn(scriptui)
 
+function Emotes.Label(g)
+local scrolllabel_15 = Instance.new("TextLabel", ScrollingFrame_10)
+scrolllabel_15.TextWrapped = true
+scrolllabel_15.BorderSizePixel = 0
+scrolllabel_15.TextSize = 15
+scrolllabel_15.TextXAlignment = Enum.TextXAlignment.Left
+scrolllabel_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+scrolllabel_15.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+scrolllabel_15.TextColor3 = Color3.fromRGB(255, 255, 255)
+scrolllabel_15.BackgroundTransparency = 0.8
+scrolllabel_15.Size = UDim2.new(0, 238, 0, 18)
+scrolllabel_15.Name = "labels_"..numbers
+scrolllabel_15.Text = g.text or ""
+scrolllabel_15.Position = UDim2.new(0, -2, 0, 0)
+	numbers = numbers + 1
+end
 
 
 function Emotes.animate(d)
@@ -242,7 +258,8 @@ b.FontFace = Font.new([[rbxasset://fonts/families/Roboto.json]], Enum.FontWeight
 b.AutomaticSize = Enum.AutomaticSize.Y
 b.Size = UDim2.new(0, 238, 0, 28)
 b.Text = d.name
-b.Name = "emotetoggle_"..numbers
+b.RichText = true
+b.Name = "emotetoggle_"..numbers or "unknown"
 b.Position = UDim2.new(0, 2, 0, 2)
 
 
@@ -324,32 +341,6 @@ end;
 
 local viewstate = false
 
-viewtoggle_4.MouseButton1Click:Connect(function()
-		viewstate = not viewstate
-		if viewstate then
-			UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
-		else
-			UIStroke_6.Color = Color3.fromRGB(0, 120, 0)
-		end
-	end)
-
-function Emotes.Label(g)
-local scrolllabel_15 = Instance.new("TextLabel", ScrollingFrame_10)
-scrolllabel_15.TextWrapped = true
-scrolllabel_15.BorderSizePixel = 0
-scrolllabel_15.TextSize = 15
-scrolllabel_15.TextXAlignment = Enum.TextXAlignment.Left
-scrolllabel_15.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-scrolllabel_15.FontFace = Font.new([[rbxasset://fonts/families/BuilderSans.json]], Enum.FontWeight.Regular, Enum.FontStyle.Normal)
-scrolllabel_15.TextColor3 = Color3.fromRGB(255, 255, 255)
-scrolllabel_15.BackgroundTransparency = 0.8
-scrolllabel_15.Size = UDim2.new(0, 238, 0, 18)
-scrolllabel_15.Name = "labels_"..numbers
-scrolllabel_15.Text = g.text
-scrolllabel_15.Position = UDim2.new(0, -2, 0, 0)
-	numbers = numbers + 1
-end
-
 local target = namebox; local lp=game.Players.LocalPlayer; local cam=workspace.CurrentCamera
 local cons={}; local on=false
 
@@ -382,6 +373,17 @@ local function view()
 	cons[2]=t.CharacterRemoving:Connect(stopview)
 	cons[3]=t.AncestryChanged:Connect(function(_,p) if not p then stopview() end end)
 end
+
+viewtoggle_4.MouseButton1Click:Connect(function()
+		viewstate = not viewstate
+		if viewstate then
+			UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
+			stopview()
+		else
+			UIStroke_6.Color = Color3.fromRGB(0, 120, 0)
+			view()
+		end
+	end)
 
 
 return {Emotes,namebox}

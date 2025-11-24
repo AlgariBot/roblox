@@ -344,44 +344,49 @@ local viewstate = false
 local target = namebox.Text; local lp=game.Players.LocalPlayer; local cam=workspace.CurrentCamera
 local cons={}; local on=false
 
-local function stopview()
-	on=false; for _,c in pairs(cons) do c:Disconnect() end
-	local h=lp.Character and lp.Character:FindFirstChild("Humanoid")
-	if h then cam.CameraSubject=h end
+local tg=""; local lp=game.Players.LocalPlayer; local cm=workspace.CurrentCamera
+local cn={}; local on=false
+
+local function sv()
+	on=false; for _,cc in pairs(cn) do cc:Disconnect() end
+	local hm=lp.Character and lp.Character:FindFirstChild("Humanoid")
+	if hm then cm.CameraSubject=hm end
 end
 
-local function find()
-	local s=target:lower()
-	for _,v in pairs(game.Players:GetPlayers()) do
-		if v~=lp then
-			local a=v.Name:lower(); local b=v.DisplayName:lower()
-			if a:find(s) or b:find(s) then return v end
+local function fd()
+	local st=tg:lower()
+	if st=="" then return end
+	for _,pl in pairs(game.Players:GetPlayers()) do
+		if pl~=lp then
+			local nm=pl.Name:lower(); local dn=pl.DisplayName:lower()
+			if nm==st or dn==st or nm:sub(1,#st)==st or dn:sub(1,#st)==st then return pl end
 		end
 	end
 end
 
-local function view()
+local function vw()
 	if on then return end
-	local t=find(); if not t then return end
+	local tr=fd(); if not tr then return end
 	on=true
-	local c=t.Character or t.CharacterAdded:Wait(); local h=c:FindFirstChild("Humanoid")
-	if not h then stopview() return end
-	cam.CameraSubject=h
-	cons[1]=t.CharacterAdded:Connect(function(ch)
-		local h2=ch:FindFirstChild("Humanoid"); if h2 then cam.CameraSubject=h2 else stopview() end
+	local ch=tr.Character or tr.CharacterAdded:Wait(); local hm=ch:FindFirstChild("Humanoid")
+	if not hm then sv() return end
+	cm.CameraSubject=hm
+	cn[1]=tr.CharacterAdded:Connect(function(nc)
+		local nh=nc:FindFirstChild("Humanoid"); if nh then cm.CameraSubject=nh else sv() end
 	end)
-	cons[2]=t.CharacterRemoving:Connect(stopview)
-	cons[3]=t.AncestryChanged:Connect(function(_,p) if not p then stopview() end end)
+	cn[2]=tr.CharacterRemoving:Connect(sv)
+	cn[3]=tr.AncestryChanged:Connect(function(_,pr) if not pr then sv() end end)
 end
+
 
 viewtoggle_4.MouseButton1Click:Connect(function()
 		viewstate = not viewstate
 		if viewstate then
 			UIStroke_6.Color = Color3.fromRGB(152, 152, 152)
-			stopview()
+			sv()
 		else
 			UIStroke_6.Color = Color3.fromRGB(0, 120, 200)
-			view()
+			vw()
 		end
 	end)
 

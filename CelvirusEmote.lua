@@ -278,7 +278,7 @@ UIStroke_13.Color = Color3.fromRGB(59, 59, 59)
 		if ct then ct:Disconnect();ct=nil end;
 		for _,x in ipairs(anims)do if x.Track then x.Track:Stop();x.Track=nil end end;
 		restoreOriginal();isPlay,isTP=false,false;
-		UIStroke_13.Color = Color3.fromRGB(59, 59, 59);
+		UIStroke_13.Color = Color3.fromRGB(59, 59, 59);b.BackgroundColor3 = Color3.fromRGB(47, 47, 47);
 		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
 	end;
 
@@ -324,7 +324,7 @@ UIStroke_13.Color = Color3.fromRGB(59, 59, 59)
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
 				if ok and tr then x.Track=tr;x.Track.Looped=true;x.Track:Play() end;
 			end;
-			isPlay=true;UIStroke_13.Color = Color3.fromRGB(0, 90, 190); b.BackgroundColor3 = Color3.fromRGB(0, 100, 210);
+			isPlay=true;UIStroke_13.Color = Color3.fromRGB(0, 90, 170); b.BackgroundColor3 = Color3.fromRGB(0, 100, 210);
 			task.delay(d.delay or 0.5,function()
 				if isPlay then for _,x in ipairs(anims)do if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end end end;
 			end);

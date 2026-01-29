@@ -6,9 +6,10 @@
 
 ]]
 
+--[[ GUI ]]--
 local Anim = {}
 
-local ScreenGui = Instance.new("ScreenGui", game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"))
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local Frame = Instance.new("Frame", ScreenGui)
@@ -184,27 +185,6 @@ close.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
 end)
 
-function Anim.Button(da)
-	local play = Instance.new("TextButton", da.parent or nil)
-	play.BorderSizePixel = 0
-	play.TextSize = 16
-	play.TextColor3 = Color3.fromRGB(255, 255, 255)
-	play.BackgroundColor3 = Color3.fromRGB(0, 78, 68)
-	play.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
-	play.Size = UDim2.new(0, 320, 0, 24)
-	play.Text = da.text or "No Text"
-	play.Name = "Cplay"
-	play.Position = UDim2.new(0, -4, 0, -36)
-
-	local UICorner_7 = Instance.new("UICorner", play)
-	UICorner_7.CornerRadius = UDim.new(0, 4)
-
-	local UIStroke_5 = Instance.new("UIStroke", play)
-	UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-	UIStroke_5.Thickness = 2
-	UIStroke_5.Color = Color3.fromRGB(0, 91, 78)
-end
-
 function Anim.Tab(dat)
 	
 local state = false
@@ -302,5 +282,135 @@ end)
 
 return {Scroll}
 end
+
+function Anim.Button(d)
+	local p=game.Players.LocalPlayer;
+	local c=p.Character or p.CharacterAdded:Wait();
+	local h=c:WaitForChild("Humanoid");
+	local a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
+	local anims={};
+	for _,id in ipairs({d.anim1,d.anim2,d.anim3,d.anim4,d.anim5,d.anim6})do
+		if id~="" and id~="0" then
+			local A=Instance.new("Animation");A.AnimationId="rbxassetid://"..id;
+			table.insert(anims,{Anim=A,Track=nil});
+		end;
+	end;
+
+	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil;
+	local canJump=true;
+
+	local function setCollide(v)
+		for _,x in ipairs(c:GetDescendants())do
+			if x:IsA("BasePart") then x.CanCollide=v end;
+		end;
+	end;
+
+	local function restoreOriginal()
+		local r=c:FindFirstChild("HumanoidRootPart");if r then r.AssemblyLinearVelocity=Vector3.new() end;
+		h.JumpPower=canJump and h.JumpPower or h.JumpPower;
+		setCollide(true);
+	end;
+
+	local play = Instance.new("TextButton", d.parent or nil)
+	play.BorderSizePixel = 0
+	play.TextSize = 16
+	play.TextColor3 = Color3.fromRGB(255, 255, 255)
+	play.BackgroundColor3 = Color3.fromRGB(0, 78, 68)
+	play.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+	play.Size = UDim2.new(0, 320, 0, 24)
+	play.Text = d.text or d.name
+	play.Name = "Cplay"
+	play.Position = UDim2.new(0, -4, 0, -36)
+
+	local UICorner_7 = Instance.new("UICorner", play)
+	UICorner_7.CornerRadius = UDim.new(0, 4)
+
+	local UIStroke_5 = Instance.new("UIStroke", play)
+	UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	UIStroke_5.Thickness = 2
+	UIStroke_5.Color = Color3.fromRGB(0, 91, 78)
+
+	local function stop()
+		if cp then cp:Disconnect();cp=nil end;
+		if ct then ct:Disconnect();ct=nil end;
+		for _,x in ipairs(anims)do if x.Track then x.Track:Stop();x.Track=nil end end;
+		restoreOriginal();isPlay,isTP=false,false;
+		UIStroke_5.Color = Color3.fromRGB(0, 91, 78);
+		play.BackgroundColor3 = Color3.fromRGB(0, 78, 68);
+		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
+	end;
+
+	local function find(n)
+		n=n:lower();
+		for _,pl in ipairs(game.Players:GetPlayers())do
+			if pl.Name:lower():sub(1,#n)==n or pl.DisplayName:lower():sub(1,#n)==n then return pl end;
+		end;
+	end;
+
+	local function tp()
+		local r=c:FindFirstChild("HumanoidRootPart");
+		local tr=t and t.Character and t.Character:FindFirstChild("HumanoidRootPart");
+		if not(r and tr)then return end;
+		local last=tick();
+		cp=game:GetService("RunService").Stepped:Connect(function(_,dt)
+			if not isTP or not t or not t.Parent then stop()return end;
+			tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart");
+			if not tr then stop()return end;
+			h:ChangeState(11);r.AssemblyLinearVelocity=Vector3.new();
+			local rot=CFrame.Angles(math.rad(d.rotX),math.rad(d.rotY),math.rad(d.rotZ));
+			if d.speed>25 then r.CFrame=tr.CFrame*off*rot else
+				r.CFrame=r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5));
+			end;
+			if tick()-last>=(d.toggleDelay or 0.5)then
+				off=(off==d.offset1)and d.offset2 or d.offset1;last=tick();
+			end;
+		end);
+	end;
+
+	play.MouseButton1Click:Connect(function()
+		t=find(d.targetBox.Text);if not t then return end;
+		if ct then ct:Disconnect() end;
+		ct=t.AncestryChanged:Connect(function(_,p2)if not p2 then stop() end end);
+		if t.Character then local th=t.Character:FindFirstChildOfClass("Humanoid");if th then th.Died:Connect(stop) end end;
+		t.CharacterAdded:Connect(stop);
+		isTP=not isTP;if isTP then tp() end;
+		if isPlay then stop() else
+			canJump=h.JumpPower>0;
+			setCollide(false);
+			local s=c:FindFirstChild("Animate");if s then s.Disabled=true end;
+			for _,track in ipairs(h:GetPlayingAnimationTracks())do track:Stop() end;
+			task.wait(0.1);
+			for _,x in ipairs(anims)do
+				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
+				if ok and tr then
+					x.Track=tr;x.Track.Looped=true;x.Track:Play();
+					if d.StartAt then x.Track.TimePosition=d.StartAt end;
+					if d.EndAt then
+						task.spawn(function()
+							while isPlay and x.Track and x.Track.TimePosition<d.EndAt do task.wait() end;
+							if isPlay then stop() end;
+						end);
+					end;
+				end;
+			end;
+			isPlay=true;
+			UIStroke_5.Color = Color3.fromRGB(0, 170, 140);
+			play.BackgroundColor3 = Color3.fromRGB(0, 120, 100);
+			task.delay(d.delay or 0.5,function()
+				if isPlay then
+					for _,x in ipairs(anims)do
+						if x.Track then x.Track:AdjustSpeed(d.speedMult or 1) end;
+					end;
+				end;
+			end);
+		end;
+	end);
+
+	p.CharacterAdded:Connect(function()
+		stop();c=p.Character;h=c:WaitForChild("Humanoid");
+		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
+	end);
+end;
+
 
 return {ScrollingFrame, Anim}

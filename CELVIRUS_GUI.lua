@@ -175,14 +175,14 @@ UICorner_10.CornerRadius = UDim.new(1, 0)
 maxmize.MouseButton1Click:Connect(function()
     maxmize.Visible = false
     Frame.Visible = true
-end
+end)
 minimize.MouseButton1Click:Connect(function()
     maxmize.Visible = true
     Frame.Visible = false
-end
+end)
 close.MouseButton1Click:Connect(function()
     ScreenGui:Destroy()
-end
+end)
 
 function Anim.Button(da)
 	local play = Instance.new("TextButton", da.parent or nil)

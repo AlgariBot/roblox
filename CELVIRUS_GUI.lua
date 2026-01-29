@@ -193,7 +193,7 @@ function Anim.Button(da)
 	play.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 	play.Size = UDim2.new(0, 320, 0, 24)
 	play.Text = da.text or "No Text"
-	play.Name = "play"
+	play.Name = "Cplay"
 	play.Position = UDim2.new(0, -4, 0, -36)
 
 	local UICorner_7 = Instance.new("UICorner", play)
@@ -214,7 +214,7 @@ Tabbtn.BorderSizePixel = 0
 Tabbtn.BackgroundColor3 = Color3.fromRGB(0, 133, 123)
 Tabbtn.Size = UDim2.new(0, 328, 0, 26)
 Tabbtn.Position = UDim2.new(0, 4, 0, 0)
-Tabbtn.Name = "Tabbtn"
+Tabbtn.Name = "CTabbtn"
 
 local UICorner_8 = Instance.new("UICorner", Tabbtn)
 UICorner_8.CornerRadius = UDim.new(0, 5)

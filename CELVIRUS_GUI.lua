@@ -368,7 +368,7 @@ function Anim.Button(d)
 	end;
 
 	play.MouseButton1Click:Connect(function()
-		t=find(d.targetBox.Text);if not t then return end;
+		t=find(namebox.Text);if not t then return end;
 		if ct then ct:Disconnect() end;
 		ct=t.AncestryChanged:Connect(function(_,p2)if not p2 then stop() end end);
 		if t.Character then local th=t.Character:FindFirstChildOfClass("Humanoid");if th then th.Died:Connect(stop) end end;

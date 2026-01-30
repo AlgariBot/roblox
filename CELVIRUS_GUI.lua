@@ -318,7 +318,7 @@ function Anim.Button(d)
 	play.BackgroundColor3 = Color3.fromRGB(0, 78, 68)
 	play.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 	play.Size = UDim2.new(0, 320, 0, 24)
-	play.Text = d.text or d.name
+	play.Text = d.text or "Button"
 	play.Name = "Cplay"
 	play.Position = UDim2.new(0, -4, 0, -36)
 
@@ -337,6 +337,7 @@ function Anim.Button(d)
 		restoreOriginal();isPlay,isTP=false,false;
 		UIStroke_5.Color = Color3.fromRGB(0, 91, 78);
 		play.BackgroundColor3 = Color3.fromRGB(0, 78, 68);
+		h.Jump = true
 		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
 	end;
 
@@ -383,14 +384,21 @@ function Anim.Button(d)
 			for _,x in ipairs(anims)do
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
 				if ok and tr then
-					x.Track=tr;x.Track.Looped=true;x.Track:Play();
-					if d.StartAt then x.Track.TimePosition=d.StartAt end;
+					x.Track=tr
+					x.Track.Looped=false
+					x.Track:Play()
+					x.Track.TimePosition=d.StartAt or 0
 					if d.EndAt then
 						task.spawn(function()
-							while isPlay and x.Track and x.Track.TimePosition<d.EndAt do task.wait() end;
-							if isPlay then stop() end;
-						end);
-					end;
+							while isPlay and x.Track do
+								if x.Track.TimePosition>=d.EndAt then
+									x.Track.TimePosition=d.StartAt or 0
+									x.Track:Play()
+								end
+								task.wait()
+							end
+						end)
+					end
 				end;
 			end;
 			isPlay=true;
@@ -411,6 +419,7 @@ function Anim.Button(d)
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
 	end);
 end;
+
 
 
 return {ScrollingFrame, Anim}

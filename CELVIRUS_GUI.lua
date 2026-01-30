@@ -306,9 +306,10 @@ function Anim.Button(d)
 	end;
 
 	local function restoreOriginal()
-		local r=c:FindFirstChild("HumanoidRootPart");if r then r.AssemblyLinearVelocity=Vector3.new() end;
-		h.JumpPower=canJump and h.JumpPower or h.JumpPower;
+		local r=c:FindFirstChild("HumanoidRootPart");
+		if r then r.AssemblyLinearVelocity=Vector3.new() end;
 		setCollide(true);
+		h:ChangeState(Enum.HumanoidStateType.Jumping);
 	end;
 
 	local play = Instance.new("TextButton", d.parent or nil)
@@ -333,18 +334,22 @@ function Anim.Button(d)
 	local function stop()
 		if cp then cp:Disconnect();cp=nil end;
 		if ct then ct:Disconnect();ct=nil end;
-		for _,x in ipairs(anims)do if x.Track then x.Track:Stop();x.Track=nil end end;
-		restoreOriginal();isPlay,isTP=false,false;
+		for _,x in ipairs(anims)do
+			if x.Track then x.Track:Stop();x.Track=nil end
+		end;
+		isPlay,isTP=false,false;
+		restoreOriginal();
 		UIStroke_5.Color = Color3.fromRGB(0, 91, 78);
 		play.BackgroundColor3 = Color3.fromRGB(0, 78, 68);
-		h.Jump = true
 		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
 	end;
 
 	local function find(n)
 		n=n:lower();
 		for _,pl in ipairs(game.Players:GetPlayers())do
-			if pl.Name:lower():sub(1,#n)==n or pl.DisplayName:lower():sub(1,#n)==n then return pl end;
+			if pl.Name:lower():sub(1,#n)==n or pl.DisplayName:lower():sub(1,#n)==n then
+				return pl
+			end;
 		end;
 	end;
 
@@ -357,13 +362,17 @@ function Anim.Button(d)
 			if not isTP or not t or not t.Parent then stop()return end;
 			tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart");
 			if not tr then stop()return end;
-			h:ChangeState(11);r.AssemblyLinearVelocity=Vector3.new();
+			h:ChangeState(11);
+			r.AssemblyLinearVelocity=Vector3.new();
 			local rot=CFrame.Angles(math.rad(d.rotX),math.rad(d.rotY),math.rad(d.rotZ));
-			if d.speed>25 then r.CFrame=tr.CFrame*off*rot else
+			if d.speed>25 then
+				r.CFrame=tr.CFrame*off*rot
+			else
 				r.CFrame=r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5));
 			end;
 			if tick()-last>=(d.toggleDelay or 0.5)then
-				off=(off==d.offset1)and d.offset2 or d.offset1;last=tick();
+				off=(off==d.offset1)and d.offset2 or d.offset1;
+				last=tick();
 			end;
 		end);
 	end;
@@ -372,38 +381,48 @@ function Anim.Button(d)
 		t=find(namebox.Text);if not t then return end;
 		if ct then ct:Disconnect() end;
 		ct=t.AncestryChanged:Connect(function(_,p2)if not p2 then stop() end end);
-		if t.Character then local th=t.Character:FindFirstChildOfClass("Humanoid");if th then th.Died:Connect(stop) end end;
+		if t.Character then
+			local th=t.Character:FindFirstChildOfClass("Humanoid");
+			if th then th.Died:Connect(stop) end;
+		end;
 		t.CharacterAdded:Connect(stop);
 		isTP=not isTP;if isTP then tp() end;
-		if isPlay then stop() else
+
+		if isPlay then
+			stop()
+		else
 			canJump=h.JumpPower>0;
 			setCollide(false);
 			local s=c:FindFirstChild("Animate");if s then s.Disabled=true end;
 			for _,track in ipairs(h:GetPlayingAnimationTracks())do track:Stop() end;
 			task.wait(0.1);
+
+			isPlay=true;
 			for _,x in ipairs(anims)do
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
 				if ok and tr then
-					x.Track=tr
-					x.Track.Looped=false
-					x.Track:Play()
-					x.Track.TimePosition=d.StartAt or 0
+					x.Track=tr;
+					x.Track.Looped=false;
+					x.Track:Play();
+					x.Track.TimePosition=d.StartAt or 0;
+
 					if d.EndAt then
 						task.spawn(function()
 							while isPlay and x.Track do
 								if x.Track.TimePosition>=d.EndAt then
-									x.Track.TimePosition=d.StartAt or 0
-									x.Track:Play()
-								end
-								task.wait()
-							end
-						end)
-					end
+									x.Track.TimePosition=d.StartAt or 0;
+									x.Track:Play();
+								end;
+								task.wait();
+							end;
+						end);
+					end;
 				end;
 			end;
-			isPlay=true;
+
 			UIStroke_5.Color = Color3.fromRGB(0, 170, 140);
 			play.BackgroundColor3 = Color3.fromRGB(0, 120, 100);
+
 			task.delay(d.delay or 0.5,function()
 				if isPlay then
 					for _,x in ipairs(anims)do
@@ -415,7 +434,9 @@ function Anim.Button(d)
 	end);
 
 	p.CharacterAdded:Connect(function()
-		stop();c=p.Character;h=c:WaitForChild("Humanoid");
+		stop();
+		c=p.Character;
+		h=c:WaitForChild("Humanoid");
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
 	end);
 end;

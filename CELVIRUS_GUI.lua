@@ -298,6 +298,7 @@ function Anim.Button(d)
 
 	local t,isPlay,isTP,off,ct,cp=false,false,false,d.offset1,nil,nil;
 	local canJump=true;
+	local rs=game:GetService("RunService");
 
 	local function setCollide(v)
 		for _,x in ipairs(c:GetDescendants())do
@@ -309,7 +310,6 @@ function Anim.Button(d)
 		local r=c:FindFirstChild("HumanoidRootPart");
 		if r then r.AssemblyLinearVelocity=Vector3.new() end;
 		setCollide(true);
-		h:ChangeState(Enum.HumanoidStateType.Jumping);
 	end;
 
 	local play = Instance.new("TextButton", d.parent or nil)
@@ -319,7 +319,7 @@ function Anim.Button(d)
 	play.BackgroundColor3 = Color3.fromRGB(0, 78, 68)
 	play.FontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
 	play.Size = UDim2.new(0, 320, 0, 24)
-	play.Text = d.text or "Button"
+	play.Text = d.text or d.name
 	play.Name = "Cplay"
 	play.Position = UDim2.new(0, -4, 0, -36)
 
@@ -339,43 +339,29 @@ function Anim.Button(d)
 		end;
 		isPlay,isTP=false,false;
 		restoreOriginal();
+		h:ChangeState(Enum.HumanoidStateType.Jumping);
 		UIStroke_5.Color = Color3.fromRGB(0, 91, 78);
 		play.BackgroundColor3 = Color3.fromRGB(0, 78, 68);
 		local s=c:FindFirstChild("Animate");if s then s.Disabled=false end;
 	end;
 
-	local function find(n)
-		n=n:lower();
-		for _,pl in ipairs(game.Players:GetPlayers())do
-			if pl.Name:lower():sub(1,#n)==n or pl.DisplayName:lower():sub(1,#n)==n then
-				return pl
-			end;
-		end;
-	end;
+	local function loopTrack(x)
+		local startAt=d.StartAt or 0
+		local endAt=d.EndAt
+		x.Track.Looped=false
+		x.Track.TimePosition=startAt
+		x.Track:Play()
 
-	local function tp()
-		local r=c:FindFirstChild("HumanoidRootPart");
-		local tr=t and t.Character and t.Character:FindFirstChild("HumanoidRootPart");
-		if not(r and tr)then return end;
-		local last=tick();
-		cp=game:GetService("RunService").Stepped:Connect(function(_,dt)
-			if not isTP or not t or not t.Parent then stop()return end;
-			tr=t.Character and t.Character:FindFirstChild("HumanoidRootPart");
-			if not tr then stop()return end;
-			h:ChangeState(11);
-			r.AssemblyLinearVelocity=Vector3.new();
-			local rot=CFrame.Angles(math.rad(d.rotX),math.rad(d.rotY),math.rad(d.rotZ));
-			if d.speed>25 then
-				r.CFrame=tr.CFrame*off*rot
-			else
-				r.CFrame=r.CFrame:Lerp(tr.CFrame*off*rot,dt*(d.speed>0 and d.speed or 5));
-			end;
-			if tick()-last>=(d.toggleDelay or 0.5)then
-				off=(off==d.offset1)and d.offset2 or d.offset1;
-				last=tick();
-			end;
-		end);
-	end;
+		task.spawn(function()
+			while isPlay and x.Track do
+				if endAt and x.Track.TimePosition>=endAt then
+					x.Track.TimePosition=startAt
+					x.Track:Play()
+				end
+				rs.Heartbeat:Wait()
+			end
+		end)
+	end
 
 	play.MouseButton1Click:Connect(function()
 		t=find(namebox.Text);if not t then return end;
@@ -402,21 +388,7 @@ function Anim.Button(d)
 				local ok,tr=pcall(function()return a:LoadAnimation(x.Anim)end);
 				if ok and tr then
 					x.Track=tr;
-					x.Track.Looped=false;
-					x.Track:Play();
-					x.Track.TimePosition=d.StartAt or 0;
-
-					if d.EndAt then
-						task.spawn(function()
-							while isPlay and x.Track do
-								if x.Track.TimePosition>=d.EndAt then
-									x.Track.TimePosition=d.StartAt or 0;
-									x.Track:Play();
-								end;
-								task.wait();
-							end;
-						end);
-					end;
+					loopTrack(x);
 				end;
 			end;
 
@@ -440,7 +412,6 @@ function Anim.Button(d)
 		a=h:FindFirstChildOfClass("Animator") or Instance.new("Animator",h);
 	end);
 end;
-
 
 
 return {ScrollingFrame, Anim}
